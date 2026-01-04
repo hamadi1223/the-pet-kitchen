@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Build a personalized subscription for your dog or cat with The Pet Kitchen. Calculate feeding portions, pouches, and prices for weekly, monthly, and 3-month plans.">
+  <meta name="keywords" content="pet food subscription, dog food subscription, cat food subscription, feeding calculator, Kuwait">
+  <meta name="theme-color" content="#C6A769">
+
+  <title>Subscriptions - The Pet Kitchen</title>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%23ffffff'/><text x='50' y='70' font-size='60' text-anchor='middle'>🐾</text></svg>">
+  <link rel="apple-touch-icon" href="assets/images/hero/dog_hero.png">
+
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/subscriptions.css">
+  <link rel="stylesheet" href="css/questionnaire-wizard.css">
+
+  <!-- EmailJS removed - now using Outlook SMTP via backend API -->
+</head>
+<body>
+  <header class="header">
+    <div class="container">
+      <div class="header-content">
+        <a href="index.html" class="logo">
+          <span>THE PET KITCHEN</span>
+        </a>
+
+        <nav class="nav desktop-nav" role="navigation">
+          <ul class="nav-list">
+            <li><a href="index.html" class="nav-link">ABOUT US</a></li>
+            <li class="nav-item-dropdown">
+              <button 
+                id="menuMealPlans" 
+                class="nav-link dropdown-trigger" 
+                aria-expanded="false" 
+                aria-controls="submenuMealPlans"
+                data-nav="meal-plans"
+              >
+                MEAL PLANS
+                <svg width="12" height="8" viewBox="0 0 12 8" fill="none">
+                  <path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+              </button>
+              <ul id="submenuMealPlans" class="dropdown-menu" role="menu">
+                <li><a href="meal-plans.html?filter=dogs" class="dropdown-link" role="menuitem">Dogs</a></li>
+                <li><a href="meal-plans.html?filter=cats" class="dropdown-link" role="menuitem">Cats</a></li>
+              </ul>
+            </li>
+            <li><a href="instructions.html" class="nav-link">INSTRUCTIONS</a></li>
+            <li><a href="subscriptions.html" class="nav-link active">SUBSCRIPTIONS</a></li>
+            <li><a href="index.html#reviews" class="nav-link">REVIEWS</a></li>
+            <li><a href="events.html" class="nav-link">EVENTS</a></li>
+            <li><a href="account.html" class="nav-link">MY ACCOUNT</a></li>
+            <li><a href="cart.html" class="nav-link">CART</a></li>
+            <li><button id="openQuestionnaire" class="btn btn-primary">START QUESTIONNAIRE</button></li>
+          </ul>
+        </nav>
+
+        <button type="button" id="navToggle" class="nav-toggle" aria-expanded="false" aria-controls="mobileMenu" aria-label="Toggle navigation menu">
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+        </button>
+      </div>
+    </div>
+
+    <div id="mobileMenu" class="mobile-panel" role="dialog">
+      <nav class="mobile-nav" role="navigation">
+        <ul class="mobile-nav-list">
+          <li><a href="index.html" class="mobile-nav-link">About Us</a></li>
+          <li class="mobile-nav-item-dropdown">
+            <button class="mobile-nav-link mobile-dropdown-trigger">
+              Meal Plans
+              <svg width="12" height="8" viewBox="0 0 12 8" fill="none">
+                <path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+            </button>
+            <ul class="mobile-dropdown-menu">
+              <li><a href="meal-plans.html?filter=dogs" class="mobile-nav-link mobile-nav-sublink">Dogs</a></li>
+              <li><a href="meal-plans.html?filter=cats" class="mobile-nav-link mobile-nav-sublink">Cats</a></li>
+            </ul>
+          </li>
+          <li><a href="instructions.html" class="mobile-nav-link">Instructions</a></li>
+          <li><a href="subscriptions.html" class="mobile-nav-link active">Subscriptions</a></li>
+          <li><a href="index.html#reviews" class="mobile-nav-link">Reviews</a></li>
+          <li><a href="events.html" class="mobile-nav-link">Events</a></li>
+          <li><a href="account.html" class="mobile-nav-link">My Account</a></li>
+          <li><a href="cart.html" class="mobile-nav-link">Cart</a></li>
+          <li><button id="mobileQuestionnaire" class="btn btn-primary mobile-cta">Start Questionnaire</button></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="subscriptions-main">
+    <section class="subscriptions-hero">
+      <div class="container">
+        <span class="hero-eyebrow">Subscription Builder</span>
+        <h1>Build your pet’s fresh food plan</h1>
+        <p>Use our calculator to determine daily grams, pouch counts, and subscription pricing for weekly, monthly, and 3-month deliveries. Everything updates automatically based on your pet’s needs.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#subscriptionBuilder">Start Building</a>
+          <a class="btn btn-outline" href="instructions.html">View Feeding Guide</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="subscriptionBuilder" class="subscription-builder">
+      <div class="container">
+        <div class="builder-grid">
+        <div class="builder-card">
+          <div class="builder-header">
+            <h2>Personalized plans are questionnaire powered</h2>
+            <p>Every subscription is calculated by our nutrition team directly from the answers you submit in the official questionnaire. That’s how we keep feeding amounts, ideal-weight targets, and prices perfectly synced.</p>
+          </div>
+
+          <ul class="requirements-list">
+            <li>
+              <span class="req-badge">1</span>
+              <div>
+                <h4>Complete the full questionnaire</h4>
+                <p>We collect breed, weight, goals, allergies, and everything needed for a safe plan.</p>
+              </div>
+            </li>
+            <li>
+              <span class="req-badge">2</span>
+              <div>
+                <h4>Receive your feeding snapshot</h4>
+                <p>Daily grams, pouch counts, and ideal range are shown instantly in the results modal.</p>
+              </div>
+            </li>
+            <li>
+              <span class="req-badge">3</span>
+              <div>
+                <h4>Auto-build your subscription</h4>
+                <p>Hit “Build My Subscription” inside the questionnaire to bring those answers back here.</p>
+              </div>
+            </li>
+          </ul>
+
+          <div class="gate-actions">
+            <button type="button" class="btn btn-primary" id="launchQuestionnaire">
+              Start questionnaire
+            </button>
+            <button type="button" class="btn btn-outline" id="retakeQuestionnaire">
+              I already completed it
+            </button>
+          </div>
+        </div>
+
+          <aside class="insight-card">
+            <div class="insight-header">
+              <p class="insight-eyebrow">Ideal Weight Assistant</p>
+              <h3>Your pet’s weight snapshot</h3>
+            </div>
+            <div class="insight-body">
+              <div class="metric">
+                <p class="metric-label">Ideal Range</p>
+                <p class="metric-value" id="idealRangeValue">—</p>
+              </div>
+              <div class="metric">
+                <p class="metric-label">Weight Status</p>
+                <p class="metric-value" id="weightStatusValue">—</p>
+                <p class="metric-helper" id="weightStatusHelper">Fill the form to view personalized guidance.</p>
+              </div>
+            </div>
+            <div class="insight-footer">
+              <p id="weightMessageEn" class="insight-message">Fill the calculator to see English guidance.</p>
+              <p id="weightMessageAr" class="insight-message ar">سنعرض الرسالة العربية هنا بعد إدخال البيانات.</p>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- Subscription Plans Section (shown when questionnaire data is present) -->
+    <section id="subscriptionPlans" class="subscription-plans" style="display: none;">
+      <div class="container">
+        <div class="plans-header">
+          <h2>Your Subscription Plans</h2>
+          <p>Choose the delivery frequency that works best for you and your pet</p>
+        </div>
+        
+        <div class="plans-grid" id="plansGrid">
+          <!-- Plans will be dynamically inserted here -->
+        </div>
+
+        <!-- Sample Box Option -->
+        <div class="sample-box-card" id="sampleBoxCard" style="display: none;">
+          <div class="sample-box-content">
+            <h3>Try a Sample Box First</h3>
+            <p>6 pouches (150g each) for 12 KD</p>
+            <button type="button" class="btn btn-outline" id="sampleBoxBtn">Order Sample Box</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h4>ABOUT US</h4>
+          <ul>
+            <li><a href="index.html">How it Works</a></li>
+            <li><a href="meal-plans.html">Meal Plans</a></li>
+            <li><a href="instructions.html">Instructions</a></li>
+            <li><a href="subscriptions.html">Subscriptions</a></li>
+            <li><a href="events.html">Events</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>LEGAL</h4>
+          <ul>
+            <li><a href="privacy-policy.html">Privacy Policy</a></li>
+            <li><a href="index.html#claims">Claims</a></li>
+            <li><a href="index.html#reviews">Reviews</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>SOCIALS</h4>
+          <div class="social-links">
+            <a href="https://www.instagram.com/thepetkitchen.kw/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5" stroke="currentColor" stroke-width="2"/>
+                <circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="2"/>
+                <circle cx="18" cy="6" r="1" fill="currentColor"/>
+              </svg>
+            </a>
+          </div>
+          <h4>CONTACT</h4>
+          <address>
+            The heart of Kuwait<br>
+            <a href="mailto:info@thepetkitchen.kw">info@thepetkitchen.kw</a>
+          </address>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2024 The Pet Kitchen. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Questionnaire Modal -->
+  <div id="questionnaireModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 id="modalTitle">Pet Questionnaire</h2>
+        <button class="modal-close" aria-label="Close questionnaire">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <line x1="18" y1="6" x2="6" y2="18" stroke="currentColor" stroke-width="2"/>
+            <line x1="6" y1="6" x2="18" y2="18" stroke="currentColor" stroke-width="2"/>
+          </svg>
+        </button>
+      </div>
+      <div id="wizardRoot"></div>
+    </div>
+  </div>
+  <div id="navOverlay" class="nav-overlay"></div>
+
+  <!-- Core scripts - load in order -->
+  <script src="js/security.js" defer></script>
+  <script src="js/api.js" defer></script>
+  <script src="js/navigation.js" defer></script>
+  <script src="js/emailjs-config.js" defer></script>
+  <script src="js/questionnaire-wizard.js" defer></script>
+  <script src="js/subscriptions.js" defer></script>
+  <script src="js/app.js" defer></script>
+</body>
+</html>
+

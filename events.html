@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Join The Pet Kitchen events, workshops, and meet-ups for pet owners in Kuwait. Stay updated on upcoming pet-friendly activities.">
+  <meta name="keywords" content="pet events, pet workshops, Kuwait pet events, pet meet-ups, dog events, cat events">
+  <meta name="theme-color" content="#C6A769">
+  
+  <title>Events - The Pet Kitchen</title>
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%23ffffff'/><text x='50' y='70' font-size='60' text-anchor='middle'>🐾</text></svg>">
+  <link rel="apple-touch-icon" href="assets/images/hero/dog_hero.png">
+  
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/questionnaire-wizard.css">
+  
+  <!-- EmailJS removed - now using Outlook SMTP via backend API -->
+</head>
+<body>
+  <header class="header">
+    <div class="container">
+      <div class="header-content">
+        <a href="index.html" class="logo">
+          <span>THE PET KITCHEN</span>
+        </a>
+        
+        <nav class="nav desktop-nav" role="navigation">
+          <ul class="nav-list">
+            <li><a href="index.html" class="nav-link">ABOUT US</a></li>
+            <li class="nav-item-dropdown">
+              <button 
+                id="menuMealPlans" 
+                class="nav-link dropdown-trigger" 
+                aria-expanded="false" 
+                aria-controls="submenuMealPlans"
+                data-nav="meal-plans"
+              >
+                MEAL PLANS
+                <svg width="12" height="8" viewBox="0 0 12 8" fill="none">
+                  <path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+              </button>
+              <ul id="submenuMealPlans" class="dropdown-menu" role="menu">
+                <li><a href="meal-plans.html?filter=dogs" class="dropdown-link" role="menuitem">Dogs</a></li>
+                <li><a href="meal-plans.html?filter=cats" class="dropdown-link" role="menuitem">Cats</a></li>
+              </ul>
+            </li>
+            <li><a href="instructions.html" class="nav-link">INSTRUCTIONS</a></li>
+            <li><a href="subscriptions.html" class="nav-link">SUBSCRIPTIONS</a></li>
+            <li><a href="index.html#reviews" class="nav-link">REVIEWS</a></li>
+            <li><a href="events.html" class="nav-link active">EVENTS</a></li>
+            <li><a href="account.html" class="nav-link">MY ACCOUNT</a></li>
+            <li><a href="cart.html" class="nav-link">CART</a></li>
+            <li><button id="openQuestionnaire" class="btn btn-primary">START QUESTIONNAIRE</button></li>
+          </ul>
+        </nav>
+
+        <button type="button" id="navToggle" class="nav-toggle" aria-expanded="false" aria-controls="mobileMenu" aria-label="Toggle navigation menu">
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+        </button>
+      </div>
+    </div>
+
+    <div id="mobileMenu" class="mobile-panel" role="dialog">
+      <nav class="mobile-nav" role="navigation">
+        <ul class="mobile-nav-list">
+          <li><a href="index.html" class="mobile-nav-link">About Us</a></li>
+          <li class="mobile-nav-item-dropdown">
+            <button class="mobile-nav-link mobile-dropdown-trigger">
+              Meal Plans
+              <svg width="12" height="8" viewBox="0 0 12 8" fill="none">
+                <path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+            </button>
+            <ul class="mobile-dropdown-menu">
+              <li><a href="meal-plans.html?filter=dogs" class="mobile-nav-link mobile-nav-sublink">Dogs</a></li>
+              <li><a href="meal-plans.html?filter=cats" class="mobile-nav-link mobile-nav-sublink">Cats</a></li>
+            </ul>
+          </li>
+          <li><a href="instructions.html" class="mobile-nav-link">Instructions</a></li>
+          <li><a href="subscriptions.html" class="mobile-nav-link">Subscriptions</a></li>
+          <li><a href="index.html#reviews" class="mobile-nav-link">Reviews</a></li>
+          <li><a href="events.html" class="mobile-nav-link">Events</a></li>
+          <li><a href="account.html" class="mobile-nav-link">My Account</a></li>
+          <li><a href="cart.html" class="mobile-nav-link">Cart</a></li>
+          <li><button id="mobileQuestionnaire" class="btn btn-primary mobile-cta">Start Questionnaire</button></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="events-hero">
+      <div class="container">
+        <h1 class="page-title">EVENTS</h1>
+      </div>
+    </section>
+
+    <section class="events-content">
+      <div class="container">
+        <div class="coming-soon-card">
+          <div class="coming-soon-illustration">
+            <svg width="200" height="150" viewBox="0 0 200 150" fill="none">
+              <circle cx="100" cy="75" r="60" stroke="var(--accent)" stroke-width="2" fill="none" opacity="0.3"/>
+              <circle cx="100" cy="75" r="40" stroke="var(--accent)" stroke-width="2" fill="none" opacity="0.5"/>
+              <circle cx="100" cy="75" r="20" fill="var(--accent)" opacity="0.7"/>
+              <path d="M85 75L95 85L115 65" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <h2>Coming Soon</h2>
+          <p>We're working on exciting events for pet owners and their furry friends. Stay tuned for updates on workshops, meet-ups, and special occasions!</p>
+          <div class="notify-section">
+            <p>Want to be notified when events are available?</p>
+            <button id="notifyEvents" class="btn btn-primary">Notify Me</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h4>ABOUT US</h4>
+          <ul>
+            <li><a href="index.html">How it Works</a></li>
+            <li><a href="meal-plans.html">Meal Plans</a></li>
+            <li><a href="instructions.html">Instructions</a></li>
+            <li><a href="subscriptions.html">Subscriptions</a></li>
+            <li><a href="events.html">Events</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>LEGAL</h4>
+          <ul>
+            <li><a href="privacy-policy.html">Privacy Policy</a></li>
+            <li><a href="index.html#claims">Claims</a></li>
+            <li><a href="index.html#reviews">Reviews</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>SOCIALS</h4>
+          <div class="social-links">
+            <a href="https://www.instagram.com/thepetkitchen.kw/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5" stroke="currentColor" stroke-width="2"/>
+                <circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="2"/>
+                <circle cx="18" cy="6" r="1" fill="currentColor"/>
+              </svg>
+            </a>
+          </div>
+          <h4>CONTACT</h4>
+          <address>
+            The heart of Kuwait<br>
+            <a href="mailto:info@thepetkitchen.kw">info@thepetkitchen.kw</a>
+          </address>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2024 The Pet Kitchen. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Questionnaire Modal -->
+  <div id="questionnaireModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 id="modalTitle">Pet Questionnaire</h2>
+        <button class="modal-close" aria-label="Close questionnaire">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <line x1="18" y1="6" x2="6" y2="18" stroke="currentColor" stroke-width="2"/>
+            <line x1="6" y1="6" x2="18" y2="18" stroke="currentColor" stroke-width="2"/>
+          </svg>
+        </button>
+      </div>
+      
+      <form id="questionnaireForm" class="questionnaire-form">
+        <div class="form-group">
+          <label for="petType">Pet Type</label>
+          <select id="petType" name="petType" required>
+            <option value="">Select pet type</option>
+            <option value="dog">Dog</option>
+            <option value="cat">Cat</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="breed">Breed or Size</label>
+          <input type="text" id="breed" name="breed" placeholder="e.g., Golden Retriever, Small, Large" required>
+        </div>
+
+        <div class="form-group">
+          <label for="age">Age</label>
+          <select id="age" name="age" required>
+            <option value="">Select age range</option>
+            <option value="puppy">Puppy (0-1 year)</option>
+            <option value="adult">Adult (1-7 years)</option>
+            <option value="senior">Senior (7+ years)</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="activity">Activity Level</label>
+          <select id="activity" name="activity" required>
+            <option value="">Select activity level</option>
+            <option value="low">Low</option>
+            <option value="moderate">Moderate</option>
+            <option value="high">High</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="allergies">Allergies (Optional)</label>
+          <textarea id="allergies" name="allergies" placeholder="List any known allergies or sensitivities"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" required>
+        </div>
+
+        <div class="form-group">
+          <label for="phone">Phone (Optional)</label>
+          <input type="tel" id="phone" name="phone">
+        </div>
+
+        <button type="submit" class="btn btn-primary">Get My Recommendation</button>
+      </form>
+
+      <div id="questionnaireResult" class="questionnaire-result" style="display: none;">
+        <h3>Your Recommendation</h3>
+        <div id="recommendationContent"></div>
+        <button class="btn btn-primary" onclick="location.href='meal-plans.html'">View Meal Plans</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="navOverlay" class="nav-overlay"></div>
+  
+  <!-- Core scripts - load in order -->
+  <script src="js/security.js" defer></script>
+  <script src="js/api.js" defer></script>
+  <script src="js/navigation.js" defer></script>
+  <script src="js/emailjs-config.js" defer></script>
+  <script src="js/questionnaire-wizard.js" defer></script>
+  <script src="js/app.js" defer></script>
+</body>
+</html>

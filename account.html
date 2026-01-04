@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Your Pet Kitchen account - Manage your pets, view orders, and track your subscriptions.">
+  <meta name="theme-color" content="#C6A769">
+  
+  <title>My Account - The Pet Kitchen</title>
+  
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%23ffffff'/><text x='50' y='70' font-size='60' text-anchor='middle'>🐾</text></svg>">
+  <link rel="apple-touch-icon" href="assets/images/hero/dog_hero.png">
+  
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/account.css">
+</head>
+<body>
+  <header class="header">
+    <div class="container">
+      <div class="header-content">
+        <a href="index.html" class="logo">
+          <span>THE PET KITCHEN</span>
+        </a>
+        
+        <nav class="nav desktop-nav" role="navigation">
+          <ul class="nav-list">
+            <li><a href="index.html" class="nav-link">ABOUT US</a></li>
+            <li><a href="meal-plans.html" class="nav-link">MEAL PLANS</a></li>
+            <li><a href="instructions.html" class="nav-link">INSTRUCTIONS</a></li>
+            <li><a href="subscriptions.html" class="nav-link">SUBSCRIPTIONS</a></li>
+            <li><a href="index.html#reviews" class="nav-link">REVIEWS</a></li>
+            <li><a href="events.html" class="nav-link">EVENTS</a></li>
+            <li><a href="cart.html" class="nav-link">CART</a></li>
+            <li><a href="account.html" class="nav-link active">MY ACCOUNT</a></li>
+            <li><button id="logoutBtn" class="btn btn-outline">LOGOUT</button></li>
+          </ul>
+        </nav>
+
+        <button type="button" id="navToggle" class="nav-toggle" aria-expanded="false" aria-controls="mobileMenu" aria-label="Toggle navigation menu">
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+        </button>
+      </div>
+    </div>
+
+    <div id="mobileMenu" class="mobile-panel" role="dialog">
+      <nav class="mobile-nav" role="navigation">
+        <ul class="mobile-nav-list">
+          <li><a href="index.html" class="mobile-nav-link">About Us</a></li>
+          <li><a href="meal-plans.html" class="mobile-nav-link">Meal Plans</a></li>
+          <li><a href="instructions.html" class="mobile-nav-link">Instructions</a></li>
+          <li><a href="subscriptions.html" class="mobile-nav-link">Subscriptions</a></li>
+          <li><a href="index.html#reviews" class="mobile-nav-link">Reviews</a></li>
+          <li><a href="events.html" class="mobile-nav-link">Events</a></li>
+          <li><a href="cart.html" class="mobile-nav-link">Cart</a></li>
+          <li><a href="account.html" class="mobile-nav-link active">My Account</a></li>
+          <li><button id="mobileLogoutBtn" class="btn btn-outline mobile-cta">Logout</button></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="account-main">
+    <div class="container">
+      <!-- Loading State -->
+      <div id="loadingState" class="loading-state">
+        <p>Loading your account...</p>
+      </div>
+
+      <!-- Account Content -->
+      <div id="accountContent" style="display: none;">
+        <!-- Email Verification Reminder Banner -->
+        <div id="emailVerificationBanner" class="verification-banner" style="display: none;">
+          <div class="verification-banner-content">
+            <div class="verification-banner-icon">✉️</div>
+            <div class="verification-banner-text">
+              <h3>Verify Your Email Address</h3>
+              <p>Please verify your email address to place orders. Check your inbox for the verification link, or <a href="#" id="resendVerificationLink">resend verification email</a>.</p>
+            </div>
+            <button id="dismissVerificationBanner" class="verification-banner-dismiss" aria-label="Dismiss">×</button>
+          </div>
+        </div>
+
+        <!-- Welcome Section -->
+        <section class="account-welcome">
+          <div class="welcome-content">
+            <div class="welcome-text">
+              <h1 id="welcomeMessage">Welcome back!</h1>
+              <p class="account-email" id="accountEmail"></p>
+            </div>
+            <div class="welcome-actions">
+              <button id="adminDashboardBtn" class="btn btn-primary" style="display: none;">
+                <span style="margin-right: 0.5rem;">⚙️</span>
+                Admin Dashboard
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <!-- Pets Section -->
+        <section class="account-section">
+          <div class="section-header">
+            <h2>Your Pets</h2>
+            <button id="addPetBtn" class="btn btn-primary">+ Add Pet</button>
+          </div>
+
+          <div id="petsContainer" class="pets-grid">
+            <!-- Pet cards will be inserted here -->
+          </div>
+
+          <div id="noPetsState" class="empty-state" style="display: none;">
+            <div class="empty-icon">🐾</div>
+            <h3>We don't know your pet yet</h3>
+            <p>Add your pet to get personalized meal recommendations</p>
+            <button class="btn btn-primary" onclick="document.getElementById('addPetBtn').click()">Add Your Pet</button>
+          </div>
+        </section>
+
+        <!-- Subscriptions Section -->
+        <section class="account-section">
+          <div class="section-header">
+            <h2>My Subscriptions</h2>
+            <a href="subscriptions.html" class="btn btn-primary">View Subscriptions</a>
+          </div>
+
+          <div id="subscriptionsContainer" class="subscriptions-list">
+            <!-- Subscriptions will be inserted here -->
+          </div>
+
+          <div id="noSubscriptionsState" class="empty-state" style="display: none;">
+            <div class="empty-icon">📋</div>
+            <h3>No subscriptions yet</h3>
+            <p>Create a personalized subscription plan for your pet</p>
+            <a href="subscriptions.html" class="btn btn-primary">Build Subscription Plan</a>
+          </div>
+        </section>
+
+        <!-- Orders Section -->
+        <section class="account-section">
+          <div class="section-header">
+            <h2>Order History</h2>
+          </div>
+
+          <div id="ordersContainer" class="orders-list">
+            <!-- Orders will be inserted here -->
+          </div>
+
+          <div id="noOrdersState" class="empty-state" style="display: none;">
+            <div class="empty-icon">📦</div>
+            <h3>No orders yet</h3>
+            <p>Start ordering fresh meals for your pets</p>
+            <a href="meal-plans.html" class="btn btn-primary">Browse Meal Plans</a>
+          </div>
+        </section>
+      </div>
+
+      <!-- Error State -->
+      <div id="errorState" class="error-state" style="display: none;">
+        <p>Unable to load your account. Please try again later.</p>
+        <button class="btn btn-primary" onclick="location.reload()">Retry</button>
+      </div>
+    </div>
+  </main>
+
+  <!-- Add/Edit Pet Modal -->
+  <div id="petModal" class="modal" style="display: none;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 id="petModalTitle">Add Pet</h2>
+        <button class="modal-close" id="closePetModal">&times;</button>
+      </div>
+      <form id="petForm" class="pet-form">
+        <input type="hidden" id="petId">
+        <div class="form-group">
+          <label for="petName">Pet Name *</label>
+          <input type="text" id="petName" required>
+        </div>
+        <div class="form-group">
+          <label for="petType">Type *</label>
+          <select id="petType" required>
+            <option value="">Select type</option>
+            <option value="dog">Dog</option>
+            <option value="cat">Cat</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="petBreed">Breed</label>
+          <input type="text" id="petBreed" placeholder="e.g., Golden Retriever">
+        </div>
+        <div class="form-group">
+          <label for="petWeight">Weight (kg)</label>
+          <input type="number" id="petWeight" step="0.1" min="0.5" placeholder="e.g., 12.5">
+        </div>
+        <div class="form-group">
+          <label for="petAge">Age Group</label>
+          <select id="petAge">
+            <option value="">Select age</option>
+            <option value="puppy">Puppy</option>
+            <option value="kitten">Kitten</option>
+            <option value="adult">Adult</option>
+            <option value="senior">Senior</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="petActivity">Activity Level</label>
+          <select id="petActivity">
+            <option value="">Select activity</option>
+            <option value="low">Low</option>
+            <option value="normal">Normal</option>
+            <option value="high">High</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="petGoal">Goal</label>
+          <select id="petGoal">
+            <option value="">Select goal</option>
+            <option value="maintain">Maintain Weight</option>
+            <option value="lose_weight">Lose Weight</option>
+            <option value="gain_weight">Gain Weight</option>
+          </select>
+        </div>
+        <div class="form-actions">
+          <button type="button" class="btn btn-outline" id="cancelPetBtn">Cancel</button>
+          <button type="submit" class="btn btn-primary">Save Pet</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h4>ABOUT US</h4>
+          <ul>
+            <li><a href="index.html">How it Works</a></li>
+            <li><a href="meal-plans.html">Meal Plans</a></li>
+            <li><a href="instructions.html">Instructions</a></li>
+            <li><a href="subscriptions.html">Subscriptions</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>SOCIALS</h4>
+          <div class="social-links">
+            <a href="https://www.instagram.com/thepetkitchen.kw/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5" stroke="currentColor" stroke-width="2"/>
+                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" stroke="currentColor" stroke-width="2"/>
+                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" stroke="currentColor" stroke-width="2"/>
+              </svg>
+            </a>
+          </div>
+          <h4>ADDRESS</h4>
+          <address>The heart of Kuwait</address>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <div id="navOverlay" class="nav-overlay"></div>
+  
+  <!-- Questionnaire Modal (for Edit Pet Info) -->
+  <div id="questionnaireModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-content">
+      <!-- Wizard will be rendered here -->
+    </div>
+  </div>
+
+  <script src="js/security.js" defer></script>
+  <script src="js/api.js"></script>
+  <script src="js/navigation.js" defer></script>
+  <link rel="stylesheet" href="css/questionnaire-wizard.css">
+  <script src="js/questionnaire-wizard.js" defer></script>
+  <script src="js/app.js" defer></script>
+  <script src="js/inline-handlers.js" defer></script>
+  <script src="js/performance.js" defer></script>
+  <script src="js/account.js" defer></script>
+</body>
+</html>
+

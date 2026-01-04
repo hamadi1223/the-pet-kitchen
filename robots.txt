@@ -1,0 +1,22 @@
+# The Pet Kitchen - Robots.txt
+# Allow all search engines to crawl the website
+
+User-agent: *
+Allow: /
+
+# Sitemap location (update with your actual domain when deployed)
+# Sitemap: https://www.yourpetsite.com/sitemap.xml
+
+# Disallow crawling of scripts and styles (they're not content)
+User-agent: *
+Disallow: /js/
+Disallow: /css/
+
+# Allow images for SEO
+Allow: /assets/images/
+Allow: *.png
+Allow: *.jpg
+Allow: *.jpeg
+Allow: *.svg
+Allow: *.webp
+

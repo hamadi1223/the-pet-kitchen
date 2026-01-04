@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Admin Dashboard - The Pet Kitchen">
+  <meta name="theme-color" content="#C6A769">
+  
+  <title>Admin Dashboard - The Pet Kitchen</title>
+  
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%23ffffff'/><text x='50' y='70' font-size='60' text-anchor='middle'>🐾</text></svg>">
+  
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+  <header class="header">
+    <div class="container">
+      <div class="header-content">
+        <a href="index.html" class="logo">
+          <span>THE PET KITCHEN</span>
+        </a>
+        
+        <nav class="nav desktop-nav" role="navigation">
+          <ul class="nav-list">
+            <li><a href="index.html" class="nav-link">HOME</a></li>
+            <li><a href="admin.html" class="nav-link active">ADMIN</a></li>
+            <li><button id="logoutBtn" class="btn btn-outline">LOGOUT</button></li>
+          </ul>
+        </nav>
+
+        <button type="button" id="navToggle" class="nav-toggle" aria-expanded="false" aria-controls="mobileMenu" aria-label="Toggle navigation menu">
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+        </button>
+      </div>
+    </div>
+
+    <div id="mobileMenu" class="mobile-panel" role="dialog">
+      <nav class="mobile-nav" role="navigation">
+        <ul class="mobile-nav-list">
+          <li><a href="index.html" class="mobile-nav-link">Home</a></li>
+          <li><a href="admin.html" class="mobile-nav-link active">Admin</a></li>
+          <li><button id="mobileLogoutBtn" class="btn btn-outline mobile-cta">Logout</button></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="admin-main">
+    <div class="container">
+      <div class="admin-header">
+        <h1>Admin Dashboard</h1>
+        <p>Manage orders, users, and system settings</p>
+      </div>
+
+      <!-- Loading State with Spinner -->
+      <div id="loadingState" class="loading-state" style="display: block;">
+        <div class="loading-container">
+          <div class="loading-spinner"></div>
+          <h2 style="margin-top: 2rem; color: var(--charcoal-900); font-size: 1.5rem; font-weight: 600;">Loading Admin Dashboard</h2>
+          <p id="loadingMessage" style="margin-top: 0.75rem; color: var(--charcoal-600); font-size: 1rem;">Initializing...</p>
+          <div class="loading-progress">
+            <div class="loading-progress-bar" id="loadingProgressBar"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dashboard Content -->
+      <div id="dashboardContent" style="display: none;">
+        <!-- Key Metrics -->
+        <section class="admin-section">
+          <div class="stats-grid">
+            <div class="stat-card stat-primary">
+              <div class="stat-icon">💰</div>
+              <div class="stat-info">
+                <h3 id="totalRevenue">0.000 KD</h3>
+                <p>Total Revenue</p>
+                <span class="stat-change" id="revenueChange">All time</span>
+              </div>
+            </div>
+            <div class="stat-card stat-success">
+              <div class="stat-icon">📦</div>
+              <div class="stat-info">
+                <h3 id="totalOrders">0</h3>
+                <p>Total Orders</p>
+                <span class="stat-change" id="ordersChange">All time</span>
+              </div>
+            </div>
+            <div class="stat-card stat-info">
+              <div class="stat-icon">👥</div>
+              <div class="stat-info">
+                <h3 id="totalUsers">0</h3>
+                <p>Total Customers</p>
+                <span class="stat-change" id="usersChange">Registered</span>
+              </div>
+            </div>
+            <div class="stat-card stat-warning">
+              <div class="stat-icon">⏳</div>
+              <div class="stat-info">
+                <h3 id="pendingOrders">0</h3>
+                <p>Pending Orders</p>
+                <span class="stat-change">Needs attention</span>
+              </div>
+            </div>
+            <div class="stat-card stat-secondary">
+              <div class="stat-icon">📊</div>
+              <div class="stat-info">
+                <h3 id="avgOrderValue">0.000 KD</h3>
+                <p>Avg Order Value</p>
+                <span class="stat-change">Per order</span>
+              </div>
+            </div>
+            <div class="stat-card stat-secondary">
+              <div class="stat-icon">🐾</div>
+              <div class="stat-info">
+                <h3 id="totalPets">0</h3>
+                <p>Registered Pets</p>
+                <span class="stat-change">In system</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Quick Overview -->
+        <div class="admin-overview-grid">
+          <!-- Recent Orders -->
+          <section class="admin-section admin-section-compact">
+            <div class="section-header">
+              <h2>Recent Orders</h2>
+              <a href="#ordersTab" class="view-all-link" onclick="document.querySelector('[data-tab=orders]').click()">View All →</a>
+            </div>
+            <div id="recentOrdersContainer" class="recent-items-list">
+              <!-- Recent orders will be inserted here -->
+            </div>
+          </section>
+
+          <!-- Recent Users -->
+          <section class="admin-section admin-section-compact">
+            <div class="section-header">
+              <h2>Recent Customers</h2>
+              <a href="#usersTab" class="view-all-link" onclick="document.querySelector('[data-tab=users]').click()">View All →</a>
+            </div>
+            <div id="recentUsersContainer" class="recent-items-list">
+              <!-- Recent users will be inserted here -->
+            </div>
+          </section>
+        </div>
+
+        <!-- Tabs -->
+        <div class="admin-tabs">
+          <button class="tab-btn active" data-tab="overview">Overview</button>
+          <button class="tab-btn" data-tab="orders">All Orders</button>
+          <button class="tab-btn" data-tab="users">All Customers</button>
+          <button class="tab-btn" data-tab="subscriptions">Subscriptions</button>
+          <button class="tab-btn" data-tab="reminders">Reminders</button>
+          <button class="tab-btn" data-tab="products">Products</button>
+          <button class="tab-btn" data-tab="mealPlans">Meal Plans</button>
+        </div>
+
+        <!-- Overview Tab -->
+        <section id="overviewTab" class="admin-tab-content active">
+          <div class="overview-content">
+            <div class="overview-section">
+              <h3>Order Status Breakdown</h3>
+              <div id="orderStatusBreakdown" class="status-breakdown">
+                <!-- Status breakdown will be inserted here -->
+              </div>
+            </div>
+            <div class="overview-section">
+              <h3>Quick Actions</h3>
+              <div class="quick-actions-grid">
+                <button class="quick-action-btn" onclick="document.querySelector('[data-tab=orders]').click()">
+                  <span class="action-icon">📦</span>
+                  <span class="action-label">Manage Orders</span>
+                </button>
+                <button class="quick-action-btn" onclick="document.querySelector('[data-tab=users]').click()">
+                  <span class="action-icon">👥</span>
+                  <span class="action-label">View Customers</span>
+                </button>
+                <button class="quick-action-btn" onclick="document.querySelector('[data-tab=products]').click()">
+                  <span class="action-icon">🍽️</span>
+                  <span class="action-label">Manage Products</span>
+                </button>
+                <button class="quick-action-btn" onclick="window.location.href='index.html'">
+                  <span class="action-icon">🏠</span>
+                  <span class="action-label">View Website</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Orders Tab -->
+        <section id="ordersTab" class="admin-tab-content">
+          <div class="section-header">
+            <h2>Orders Management</h2>
+            <div class="filters">
+              <select id="statusFilter" class="filter-select">
+                <option value="">All Statuses</option>
+                <option value="created">Created</option>
+                <option value="paid">Paid</option>
+                <option value="fulfilled">Fulfilled</option>
+                <option value="cancelled">Cancelled</option>
+                <option value="failed">Failed</option>
+              </select>
+              <input type="email" id="emailFilter" class="filter-input" placeholder="Filter by email...">
+              <button id="applyFilters" class="btn btn-primary">Apply Filters</button>
+              <button id="clearFilters" class="btn btn-outline">Clear</button>
+            </div>
+          </div>
+
+          <div id="ordersContainer" class="data-container">
+            <!-- Orders will be inserted here -->
+          </div>
+
+          <div id="ordersPagination" class="pagination">
+            <!-- Pagination will be inserted here -->
+          </div>
+        </section>
+
+        <!-- Users Tab -->
+        <section id="usersTab" class="admin-tab-content">
+          <div class="section-header">
+            <h2>All Customers</h2>
+            <div class="section-actions">
+              <input type="search" id="userSearch" class="search-input" placeholder="Search by name or email...">
+            </div>
+          </div>
+
+          <div id="usersContainer" class="data-container">
+            <!-- Users will be inserted here -->
+          </div>
+
+          <div id="usersPagination" class="pagination">
+            <!-- Pagination will be inserted here -->
+          </div>
+        </section>
+
+        <!-- Subscriptions Tab -->
+        <section id="subscriptionsTab" class="admin-tab-content">
+          <div class="section-header">
+            <h2>Subscriptions Management</h2>
+            <div class="filters">
+              <select id="subscriptionStatusFilter" class="filter-select">
+                <option value="">All Statuses</option>
+                <option value="pending">Pending</option>
+                <option value="confirmed">Confirmed</option>
+                <option value="active">Active</option>
+                <option value="expiring_soon">Expiring Soon</option>
+                <option value="expired">Expired</option>
+                <option value="paused">Paused</option>
+                <option value="cancelled">Cancelled</option>
+              </select>
+              <button id="applySubscriptionFilters" class="btn btn-primary">Apply Filters</button>
+              <button id="clearSubscriptionFilters" class="btn btn-outline">Clear</button>
+            </div>
+          </div>
+
+          <!-- Subscription Stats -->
+          <div id="subscriptionStats" class="stats-grid" style="margin-bottom: 2rem;">
+            <!-- Stats will be inserted here -->
+          </div>
+
+          <div id="subscriptionsContainer" class="data-container">
+            <!-- Subscriptions will be inserted here -->
+          </div>
+
+          <div id="subscriptionsPagination" class="pagination">
+            <!-- Pagination will be inserted here -->
+          </div>
+        </section>
+
+        <!-- Products Tab -->
+        <section id="productsTab" class="admin-tab-content">
+          <div class="section-header">
+            <h2>Products Management</h2>
+            <button class="btn btn-primary" id="addNewProductBtn">+ Add New Product</button>
+          </div>
+
+          <div id="productsContainer" class="data-container">
+            <!-- Products will be inserted here -->
+          </div>
+        </section>
+
+        <!-- Meal Plans Tab -->
+        <section id="mealPlansTab" class="admin-tab-content">
+          <div class="section-header">
+            <h2>Meal Plans Management</h2>
+            <button class="btn btn-primary" id="addNewMealPlanBtn">+ Add New Meal Plan</button>
+          </div>
+
+          <div id="mealPlansContainer" class="data-container">
+            <!-- Meal plans will be inserted here -->
+          </div>
+        </section>
+
+        <!-- Reminders Tab -->
+        <section id="remindersTab" class="admin-tab-content">
+          <div class="section-header">
+            <h2>Reminders & Notifications</h2>
+            <div class="section-actions">
+              <button class="btn btn-primary" id="sendReminderEmailsBtn">📧 Send Reminder Emails</button>
+            </div>
+          </div>
+
+          <!-- Reminder Stats -->
+          <div class="stats-grid" style="margin-bottom: 2rem;">
+            <div class="stat-card stat-warning">
+              <div class="stat-icon">⏰</div>
+              <div class="stat-info">
+                <h3 id="expiringCount">0</h3>
+                <p>Subscriptions Expiring Soon</p>
+                <span class="stat-change">Next 7 days</span>
+              </div>
+            </div>
+            <div class="stat-card stat-info">
+              <div class="stat-icon">📦</div>
+              <div class="stat-info">
+                <h3 id="upcomingDeliveriesCount">0</h3>
+                <p>Upcoming Deliveries</p>
+                <span class="stat-change">Next 7 days</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Expiring Subscriptions -->
+          <div class="admin-section" style="margin-bottom: 2rem;">
+            <div class="section-header">
+              <h3>Subscriptions Expiring Soon</h3>
+            </div>
+            <div id="expiringSubscriptionsContainer" class="data-container">
+              <!-- Expiring subscriptions will be inserted here -->
+            </div>
+          </div>
+
+          <!-- Upcoming Deliveries -->
+          <div class="admin-section">
+            <div class="section-header">
+              <h3>Upcoming Deliveries</h3>
+            </div>
+            <div id="upcomingDeliveriesContainer" class="data-container">
+              <!-- Upcoming deliveries will be inserted here -->
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- Error State -->
+      <div id="errorState" class="error-state" style="display: none;">
+        <p>Unable to load dashboard. Please check your admin permissions.</p>
+        <button class="btn btn-primary" onclick="location.reload()">Retry</button>
+      </div>
+    </div>
+  </main>
+
+  <!-- Order Detail Modal -->
+  <div id="orderModal" class="modal" style="display: none;">
+    <div class="modal-content modal-large">
+      <div class="modal-header">
+        <h2>Order Details</h2>
+        <button class="modal-close" id="closeOrderModal">&times;</button>
+      </div>
+      <div id="orderModalBody" class="modal-body">
+        <!-- Order details will be inserted here -->
+      </div>
+    </div>
+  </div>
+
+  <!-- User Detail Modal -->
+  <div id="userModal" class="modal" style="display: none;">
+    <div class="modal-content modal-large">
+      <div class="modal-header">
+        <h2>User Details</h2>
+        <button class="modal-close" id="closeUserModal">&times;</button>
+      </div>
+      <div id="userModalBody" class="modal-body">
+        <!-- User details will be inserted here -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Product Add Modal -->
+  <div id="productAddModal" class="modal" style="display: none;">
+    <div class="modal-content modal-large">
+      <div class="modal-header">
+        <h2>Add New Product</h2>
+        <button class="modal-close" id="closeProductAddModal">&times;</button>
+      </div>
+      <div id="productAddModalBody" class="modal-body">
+        <form id="productAddForm">
+          <div class="form-group">
+            <label for="addProductSKU">SKU <span class="required">*</span></label>
+            <input type="text" id="addProductSKU" name="sku" required maxlength="191" placeholder="e.g., PK-DOG-001">
+            <small class="form-help">Unique product identifier</small>
+          </div>
+          <div class="form-group">
+            <label for="addProductName">Product Name <span class="required">*</span></label>
+            <input type="text" id="addProductName" name="name" required maxlength="191" placeholder="e.g., Premium Dog Food">
+          </div>
+          <div class="form-group">
+            <label for="addProductDescription">Description</label>
+            <textarea id="addProductDescription" name="description" rows="4" maxlength="1000" placeholder="Product description..."></textarea>
+          </div>
+          <div class="form-group">
+            <label for="addProductSpecies">Species <span class="required">*</span></label>
+            <select id="addProductSpecies" name="species" required>
+              <option value="dog">Dog</option>
+              <option value="cat">Cat</option>
+              <option value="both" selected>Both</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="addPricePerPouch">Price per Pouch (KD) <span class="required">*</span></label>
+            <input type="number" id="addPricePerPouch" name="price_per_pouch" step="0.001" min="0" required placeholder="0.000">
+          </div>
+          <div class="form-group">
+            <label for="addPouchGrams">Pouch Size (grams) <span class="required">*</span></label>
+            <input type="number" id="addPouchGrams" name="pouch_grams" step="1" min="1" required value="150" placeholder="150">
+          </div>
+          <div class="form-group">
+            <label for="addStockQuantity">Initial Stock Quantity</label>
+            <input type="number" id="addStockQuantity" name="stock_quantity" step="1" min="0" value="0" placeholder="0">
+          </div>
+          <div class="form-group checkbox-group">
+            <input type="checkbox" id="addIsActive" name="is_active" checked>
+            <label for="addIsActive">Is Active</label>
+          </div>
+          <div class="form-group checkbox-group">
+            <input type="checkbox" id="addIsSubscription" name="is_subscription">
+            <label for="addIsSubscription">Is Subscription Product</label>
+          </div>
+          <div class="form-group" id="addSubscriptionTypeGroup" style="display: none;">
+            <label for="addSubscriptionType">Subscription Type</label>
+            <select id="addSubscriptionType" name="subscription_type">
+              <option value="weekly">Weekly</option>
+              <option value="monthly">Monthly</option>
+              <option value="quarterly">Quarterly</option>
+            </select>
+          </div>
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Create Product</button>
+            <button type="button" class="btn btn-outline" id="cancelProductAddBtn">Cancel</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Product Edit Modal -->
+  <div id="productEditModal" class="modal" style="display: none;">
+    <div class="modal-content modal-large">
+      <div class="modal-header">
+        <h2>Edit Product</h2>
+        <button class="modal-close" id="closeProductEditModal">&times;</button>
+      </div>
+      <div id="productEditModalBody" class="modal-body">
+        <!-- Product edit form will be inserted here -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Pet Edit Modal -->
+  <div id="petEditModal" class="modal" style="display: none;">
+    <div class="modal-content modal-large">
+      <div class="modal-header">
+        <h2>Edit Pet</h2>
+        <button class="modal-close" id="closePetEditModal">&times;</button>
+      </div>
+      <div id="petEditModalBody" class="modal-body">
+        <!-- Pet edit form will be inserted here -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Subscription Edit Modal -->
+  <div id="subscriptionEditModal" class="modal" style="display: none;">
+    <div class="modal-content modal-large">
+      <div class="modal-header">
+        <h2>Manage Subscription</h2>
+        <button class="modal-close" id="closeSubscriptionEditModal">&times;</button>
+      </div>
+      <div id="subscriptionEditModalBody" class="modal-body">
+        <!-- Subscription edit form will be inserted here -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Subscription Details Modal -->
+  <div id="subscriptionModal" class="modal" style="display: none;">
+    <div class="modal-content modal-large">
+      <div class="modal-header">
+        <h2>Subscription Details</h2>
+        <button class="modal-close" id="closeSubscriptionModal">&times;</button>
+      </div>
+      <div id="subscriptionModalBody" class="modal-body">
+        <!-- Subscription details will be inserted here -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Meal Plan Edit Modal -->
+  <div id="mealPlanEditModal" class="modal" style="display: none;">
+    <div class="modal-content modal-large">
+      <div class="modal-header">
+        <h2 id="mealPlanModalTitle">Edit Meal Plan</h2>
+        <button class="modal-close" id="closeMealPlanEditModal">&times;</button>
+      </div>
+      <div id="mealPlanEditModalBody" class="modal-body">
+        <!-- Meal plan edit form will be inserted here -->
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h4>ADMIN</h4>
+          <ul>
+            <li><a href="admin.html">Dashboard</a></li>
+            <li><a href="index.html">Back to Site</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <div id="navOverlay" class="nav-overlay"></div>
+  
+  <script src="js/security.js" defer></script>
+  <script src="js/api.js"></script>
+  <script src="js/navigation.js" defer></script>
+  <script src="js/app.js" defer></script>
+  <script src="js/inline-handlers.js" defer></script>
+  <script src="js/performance.js" defer></script>
+  <script src="js/admin.js" defer></script>
+  <script src="js/admin-reminders.js" defer></script>
+</body>
+</html>
+

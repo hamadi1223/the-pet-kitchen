@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Test Payment Success - The Pet Kitchen</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    .test-success-container {
+      max-width: 600px;
+      margin: 4rem auto;
+      padding: 2rem;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+    .test-badge {
+      display: inline-block;
+      background: #FEF3C7;
+      color: #92400E;
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+    .success-icon {
+      font-size: 4rem;
+      margin-bottom: 1rem;
+    }
+    .order-info {
+      background: #FAF8F5;
+      padding: 1.5rem;
+      border-radius: 8px;
+      margin: 2rem 0;
+      text-align: left;
+    }
+    .order-info-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.5rem 0;
+      border-bottom: 1px solid #E9DECE;
+    }
+    .order-info-item:last-child {
+      border-bottom: none;
+    }
+    .btn-group {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      margin-top: 2rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="test-success-container">
+    <div class="test-badge">🧪 TEST MODE - Payment Simulation</div>
+    <div class="success-icon">✅</div>
+    <h1>Payment Successful!</h1>
+    <p style="color: var(--ink-700); margin-bottom: 2rem;">
+      This is a test payment. No real money was charged.
+    </p>
+
+    <div class="order-info" id="orderInfo">
+      <div class="order-info-item">
+        <strong>Order ID:</strong>
+        <span id="orderId">Loading...</span>
+      </div>
+      <div class="order-info-item">
+        <strong>Status:</strong>
+        <span id="orderStatus">Loading...</span>
+      </div>
+      <div class="order-info-item">
+        <strong>Invoice ID:</strong>
+        <span id="invoiceId">Loading...</span>
+      </div>
+    </div>
+
+    <div class="btn-group">
+      <a href="account.html" class="btn btn-primary">View My Orders</a>
+      <a href="index.html" class="btn btn-outline">Back to Home</a>
+    </div>
+
+    <div style="margin-top: 2rem; padding-top: 2rem; border-top: 1px solid #E9DECE; font-size: 0.85rem; color: var(--ink-600);">
+      <p><strong>Test Mode Active</strong></p>
+      <p>MyFatoorah API calls are disabled. This payment was simulated for testing purposes.</p>
+      <p style="margin-top: 0.5rem;">
+        To disable test mode, set <code style="background: #F3F4F6; padding: 0.25rem 0.5rem; border-radius: 4px;">TEST_DISABLE_MYFATOORAH=false</code> in your backend .env file.
+      </p>
+    </div>
+  </div>
+
+  <script>
+    // Extract order info from URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const orderId = urlParams.get('orderId');
+    const status = urlParams.get('status') || 'paid';
+    const invoiceId = urlParams.get('invoiceId') || 'test-invoice';
+
+    // Update UI
+    document.getElementById('orderId').textContent = orderId || 'N/A';
+    document.getElementById('orderStatus').textContent = status.toUpperCase();
+    document.getElementById('invoiceId').textContent = invoiceId;
+
+    console.log('🧪 [TEST MODE] Payment success page loaded');
+    console.log('🧪 [TEST MODE] Order ID:', orderId);
+    console.log('🧪 [TEST MODE] Status:', status);
+  </script>
+</body>
+</html>
+

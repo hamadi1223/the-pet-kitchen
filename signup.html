@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Sign up for The Pet Kitchen - Create your account and start ordering fresh meals for your pets.">
+  <meta name="theme-color" content="#C6A769">
+  
+  <title>Sign Up - The Pet Kitchen</title>
+  
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%23ffffff'/><text x='50' y='70' font-size='60' text-anchor='middle'>🐾</text></svg>">
+  <link rel="apple-touch-icon" href="assets/images/hero/dog_hero.png">
+  
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/auth.css">
+</head>
+<body>
+  <header class="header">
+    <div class="container">
+      <div class="header-content">
+        <a href="index.html" class="logo">
+          <span>THE PET KITCHEN</span>
+        </a>
+        
+        <nav class="nav desktop-nav" role="navigation">
+          <ul class="nav-list">
+            <li><a href="index.html" class="nav-link">ABOUT US</a></li>
+            <li><a href="meal-plans.html" class="nav-link">MEAL PLANS</a></li>
+            <li><a href="instructions.html" class="nav-link">INSTRUCTIONS</a></li>
+            <li><a href="subscriptions.html" class="nav-link">SUBSCRIPTIONS</a></li>
+            <li><a href="index.html#reviews" class="nav-link">REVIEWS</a></li>
+            <li><a href="events.html" class="nav-link">EVENTS</a></li>
+            <li><a href="login.html" class="btn btn-outline">LOG IN</a></li>
+          </ul>
+        </nav>
+
+        <button type="button" id="navToggle" class="nav-toggle" aria-expanded="false" aria-controls="mobileMenu" aria-label="Toggle navigation menu">
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+        </button>
+      </div>
+    </div>
+
+    <div id="mobileMenu" class="mobile-panel" role="dialog">
+      <nav class="mobile-nav" role="navigation">
+        <ul class="mobile-nav-list">
+          <li><a href="index.html" class="mobile-nav-link">About Us</a></li>
+          <li><a href="meal-plans.html" class="mobile-nav-link">Meal Plans</a></li>
+          <li><a href="instructions.html" class="mobile-nav-link">Instructions</a></li>
+          <li><a href="subscriptions.html" class="mobile-nav-link">Subscriptions</a></li>
+          <li><a href="index.html#reviews" class="mobile-nav-link">Reviews</a></li>
+          <li><a href="events.html" class="mobile-nav-link">Events</a></li>
+          <li><a href="login.html" class="btn btn-outline mobile-cta">Log In</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="auth-main">
+    <div class="container">
+      <div class="auth-container">
+        <div class="auth-header">
+          <h1>Create Your Account</h1>
+          <p>Join The Pet Kitchen and start feeding your pets the best</p>
+        </div>
+
+        <form id="signupForm" class="auth-form" method="POST" action="#" onsubmit="return false;">
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" autocomplete="name">
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required autocomplete="email">
+          </div>
+
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" required autocomplete="new-password" minlength="6">
+            <small class="form-helper">At least 6 characters</small>
+          </div>
+
+          <div class="form-group">
+            <label for="phone">Phone (WhatsApp) <span style="color: #DC2626;">*</span></label>
+            <input type="tel" id="phone" name="phone" required autocomplete="tel" placeholder="12345678" pattern="[0-9]{8}" minlength="8" maxlength="8">
+            <small class="form-helper">Enter your 8-digit Kuwait phone number (e.g., 12345678). +965 will be added automatically.</small>
+            <div id="phoneError" class="field-error" style="display: none; color: #DC2626; font-size: 0.875rem; margin-top: 0.25rem;"></div>
+          </div>
+
+          <div id="errorMessage" class="error-message" style="display: none;"></div>
+
+          <button type="submit" class="btn btn-primary btn-block" id="submitBtn">
+            Sign Up
+          </button>
+
+          <p class="auth-footer">
+            Already have an account? <a href="login.html">Log in here</a>
+          </p>
+        </form>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h4>ABOUT US</h4>
+          <ul>
+            <li><a href="index.html">How it Works</a></li>
+            <li><a href="meal-plans.html">Meal Plans</a></li>
+            <li><a href="instructions.html">Instructions</a></li>
+            <li><a href="subscriptions.html">Subscriptions</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>SOCIALS</h4>
+          <div class="social-links">
+            <a href="https://www.instagram.com/thepetkitchen.kw/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5" stroke="currentColor" stroke-width="2"/>
+                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" stroke="currentColor" stroke-width="2"/>
+                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" stroke="currentColor" stroke-width="2"/>
+              </svg>
+            </a>
+          </div>
+          <h4>ADDRESS</h4>
+          <address>The heart of Kuwait</address>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <div id="navOverlay" class="nav-overlay"></div>
+  
+  <script src="js/security.js" defer></script>
+  <script src="js/api.js"></script>
+  <script src="js/email-service.js" defer></script>
+  <script src="js/error-handler.js" defer></script>
+  <script src="js/app.js" defer></script>
+  <script src="js/navigation.js" defer></script>
+  <script src="js/auth.js" defer></script>
+</body>
+</html>
+

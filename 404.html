@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Page Not Found - The Pet Kitchen">
+  <meta name="theme-color" content="#C6A769">
+  
+  <title>Page Not Found - The Pet Kitchen</title>
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%23ffffff'/><text x='50' y='70' font-size='60' text-anchor='middle'>🐾</text></svg>">
+  <link rel="apple-touch-icon" href="assets/images/hero/dog_hero.png">
+  
+  <link rel="stylesheet" href="css/styles.css">
+  
+  <style>
+    .error-container {
+      min-height: 70vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      text-align: center;
+    }
+    
+    .error-content {
+      max-width: 600px;
+    }
+    
+    .error-code {
+      font-size: 8rem;
+      font-weight: 700;
+      color: var(--gold);
+      line-height: 1;
+      margin-bottom: 1rem;
+    }
+    
+    .error-title {
+      font-size: 2rem;
+      color: var(--ink-900);
+      margin-bottom: 1rem;
+    }
+    
+    .error-message {
+      font-size: 1.125rem;
+      color: var(--ink-700);
+      margin-bottom: 2rem;
+      line-height: 1.6;
+    }
+    
+    .error-actions {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    
+    @media (max-width: 768px) {
+      .error-code {
+        font-size: 5rem;
+      }
+      
+      .error-title {
+        font-size: 1.5rem;
+      }
+      
+      .error-message {
+        font-size: 1rem;
+      }
+      
+      .error-actions {
+        flex-direction: column;
+      }
+      
+      .error-actions .btn {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="container">
+      <div class="header-content">
+        <a href="index.html" class="logo">
+          <span>THE PET KITCHEN</span>
+        </a>
+        
+        <nav class="nav desktop-nav" role="navigation">
+          <ul class="nav-list">
+            <li><a href="index.html" class="nav-link">ABOUT US</a></li>
+            <li><a href="meal-plans.html" class="nav-link">MEAL PLANS</a></li>
+            <li><a href="instructions.html" class="nav-link">INSTRUCTIONS</a></li>
+            <li><a href="subscriptions.html" class="nav-link">SUBSCRIPTIONS</a></li>
+            <li><a href="index.html#reviews" class="nav-link">REVIEWS</a></li>
+            <li><a href="events.html" class="nav-link">EVENTS</a></li>
+            <li><a href="account.html" class="nav-link">MY ACCOUNT</a></li>
+            <li><a href="cart.html" class="nav-link">CART</a></li>
+          </ul>
+        </nav>
+
+        <button type="button" id="navToggle" class="nav-toggle" aria-expanded="false" aria-controls="mobileMenu" aria-label="Toggle navigation menu">
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+        </button>
+      </div>
+    </div>
+
+    <div id="mobileMenu" class="mobile-panel" role="dialog">
+      <nav class="mobile-nav" role="navigation">
+        <ul class="mobile-nav-list">
+          <li><a href="index.html" class="mobile-nav-link">About Us</a></li>
+          <li><a href="meal-plans.html" class="mobile-nav-link">Meal Plans</a></li>
+          <li><a href="instructions.html" class="mobile-nav-link">Instructions</a></li>
+          <li><a href="subscriptions.html" class="mobile-nav-link">Subscriptions</a></li>
+          <li><a href="index.html#reviews" class="mobile-nav-link">Reviews</a></li>
+          <li><a href="events.html" class="mobile-nav-link">Events</a></li>
+          <li><a href="account.html" class="mobile-nav-link">My Account</a></li>
+          <li><a href="cart.html" class="mobile-nav-link">Cart</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="error-container">
+      <div class="error-content">
+        <div class="error-code">404</div>
+        <h1 class="error-title">Page Not Found</h1>
+        <p class="error-message">
+          Oops! The page you're looking for doesn't exist or has been moved. 
+          Don't worry, we'll help you get back on track.
+        </p>
+        <div class="error-actions">
+          <a href="index.html" class="btn btn-primary">Go to Home</a>
+          <a href="cart.html" class="btn btn-outline">View Cart</a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h4>ABOUT US</h4>
+          <ul>
+            <li><a href="index.html">How it Works</a></li>
+            <li><a href="meal-plans.html">Meal Plans</a></li>
+            <li><a href="instructions.html">Instructions</a></li>
+            <li><a href="subscriptions.html">Subscriptions</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>SOCIALS</h4>
+          <div class="social-links">
+            <a href="https://www.instagram.com/thepetkitchen.kw/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5" stroke="currentColor" stroke-width="2"/>
+                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" stroke="currentColor" stroke-width="2"/>
+                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" stroke="currentColor" stroke-width="2"/>
+              </svg>
+            </a>
+          </div>
+          <h4>ADDRESS</h4>
+          <address>The heart of Kuwait</address>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <div id="navOverlay" class="nav-overlay"></div>
+  
+  <script src="js/security.js" defer></script>
+  <script src="js/app.js" defer></script>
+  <script src="js/navigation.js" defer></script>
+</body>
+</html>
+

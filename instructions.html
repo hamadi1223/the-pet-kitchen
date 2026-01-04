@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Complete feeding instructions for The Pet Kitchen meals. Learn how to serve, transition, and calculate the perfect portion for your pet.">
+  <meta name="keywords" content="pet feeding guide, how to serve pet food, pet food transition, feeding calculator, pet nutrition guide">
+  <meta name="theme-color" content="#C6A769">
+  
+  <title>Instructions - The Pet Kitchen</title>
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%23ffffff'/><text x='50' y='70' font-size='60' text-anchor='middle'>🐾</text></svg>">
+  <link rel="apple-touch-icon" href="assets/images/hero/dog_hero.png">
+  
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/instructions.css">
+  <link rel="stylesheet" href="css/questionnaire-wizard.css">
+  
+  <!-- EmailJS removed - now using Outlook SMTP via backend API -->
+</head>
+<body>
+  <header class="header">
+    <div class="container">
+      <div class="header-content">
+        <a href="index.html" class="logo">
+          <span>THE PET KITCHEN</span>
+        </a>
+        
+        <nav class="nav desktop-nav" role="navigation">
+          <ul class="nav-list">
+            <li><a href="index.html" class="nav-link">ABOUT US</a></li>
+            <li class="nav-item-dropdown">
+              <button 
+                id="menuMealPlans" 
+                class="nav-link dropdown-trigger" 
+                aria-expanded="false" 
+                aria-controls="submenuMealPlans"
+                data-nav="meal-plans"
+              >
+                MEAL PLANS
+                <svg width="12" height="8" viewBox="0 0 12 8" fill="none">
+                  <path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+              </button>
+              <ul id="submenuMealPlans" class="dropdown-menu" role="menu">
+                <li><a href="meal-plans.html?filter=dogs" class="dropdown-link" role="menuitem">Dogs</a></li>
+                <li><a href="meal-plans.html?filter=cats" class="dropdown-link" role="menuitem">Cats</a></li>
+              </ul>
+            </li>
+            <li><a href="instructions.html" class="nav-link active">INSTRUCTIONS</a></li>
+            <li><a href="subscriptions.html" class="nav-link">SUBSCRIPTIONS</a></li>
+            <li><a href="index.html#reviews" class="nav-link">REVIEWS</a></li>
+            <li><a href="events.html" class="nav-link">EVENTS</a></li>
+            <li><a href="account.html" class="nav-link">MY ACCOUNT</a></li>
+            <li><a href="cart.html" class="nav-link">CART</a></li>
+            <li><button id="openQuestionnaire" class="btn btn-primary">START QUESTIONNAIRE</button></li>
+          </ul>
+        </nav>
+
+        <button type="button" id="navToggle" class="nav-toggle" aria-expanded="false" aria-controls="mobileMenu" aria-label="Toggle navigation menu">
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+        </button>
+      </div>
+    </div>
+
+    <div id="mobileMenu" class="mobile-panel" role="dialog">
+      <nav class="mobile-nav" role="navigation">
+        <ul class="mobile-nav-list">
+          <li><a href="index.html" class="mobile-nav-link">About Us</a></li>
+          <li class="mobile-nav-item-dropdown">
+            <button class="mobile-nav-link mobile-dropdown-trigger">
+              Meal Plans
+              <svg width="12" height="8" viewBox="0 0 12 8" fill="none">
+                <path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+            </button>
+            <ul class="mobile-dropdown-menu">
+              <li><a href="meal-plans.html?filter=dogs" class="mobile-nav-link mobile-nav-sublink">Dogs</a></li>
+              <li><a href="meal-plans.html?filter=cats" class="mobile-nav-link mobile-nav-sublink">Cats</a></li>
+            </ul>
+          </li>
+          <li><a href="instructions.html" class="mobile-nav-link active">Instructions</a></li>
+          <li><a href="subscriptions.html" class="mobile-nav-link">Subscriptions</a></li>
+          <li><a href="index.html#reviews" class="mobile-nav-link">Reviews</a></li>
+          <li><a href="events.html" class="mobile-nav-link">Events</a></li>
+          <li><a href="account.html" class="mobile-nav-link">My Account</a></li>
+          <li><a href="cart.html" class="mobile-nav-link">Cart</a></li>
+          <li><button id="mobileQuestionnaire" class="btn btn-primary mobile-cta">Start Questionnaire</button></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="instructions-main">
+    <div class="container">
+      <header class="instructions-header">
+        <h1 class="instructions-title">Feeding Instructions</h1>
+        <p class="instructions-subtitle">Everything you need to know about serving, transitioning, and feeding your pet</p>
+      </header>
+
+      <div class="accordion-container">
+        <!-- Section 1: How to Serve -->
+        <div class="accordion-item" data-section="serve">
+          <button class="accordion-trigger" aria-expanded="false">
+            <span class="accordion-title">How to Serve Our Meals</span>
+            <svg class="accordion-arrow" width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <path d="M6 9L12 15L18 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <div class="accordion-content">
+            <div class="serving-steps">
+              <div class="step-card">
+                <div class="step-number">1</div>
+                <div class="step-content">
+                  <h3 class="step-title">Storage & Freshness</h3>
+                  <p class="step-text">Our meals are carefully prepared and stored frozen, staying fresh for up to <strong>6 months</strong> from the production date.</p>
+                </div>
+              </div>
+
+              <div class="step-card">
+                <div class="step-number">2</div>
+                <div class="step-content">
+                  <h3 class="step-title">Defrosting</h3>
+                  <p class="step-text">Defrost meals in the <strong>refrigerator for 12 hours</strong> before serving. Do not heat or re-freeze after defrosting.</p>
+                </div>
+              </div>
+
+              <div class="step-card">
+                <div class="step-number">3</div>
+                <div class="step-content">
+                  <h3 class="step-title">Check Daily Portion</h3>
+                  <p class="step-text">Check your pet's <strong>daily portion</strong> based on their weight and age (see Feeding Guide below).</p>
+                </div>
+              </div>
+
+              <div class="step-card">
+                <div class="step-number">4</div>
+                <div class="step-content">
+                  <h3 class="step-title">Measure & Divide</h3>
+                  <p class="step-text">Measure the right amount by weight or by pouch.<br>
+                  <strong>Adults:</strong> Divide daily amount into 2 meals per day.<br>
+                  <strong>Puppies & Kittens:</strong> Divide into 3–5 meals per day.</p>
+                </div>
+              </div>
+
+              <div class="step-card">
+                <div class="step-number">5</div>
+                <div class="step-content">
+                  <h3 class="step-title">Temperature</h3>
+                  <p class="step-text">Allow food to reach <strong>room temperature</strong> by waiting 5 minutes or adding a small amount of lukewarm water.</p>
+                </div>
+              </div>
+
+              <div class="step-card">
+                <div class="step-number">6</div>
+                <div class="step-content">
+                  <h3 class="step-title">Serve & Store</h3>
+                  <p class="step-text">Serve and refrigerate any unused portion. Consume within <strong>3 days</strong> of defrosting.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section 2: How to Transition -->
+        <div class="accordion-item" data-section="transition">
+          <button class="accordion-trigger" aria-expanded="false">
+            <span class="accordion-title">How to Transition to Our Meals</span>
+            <svg class="accordion-arrow" width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <path d="M6 9L12 15L18 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <div class="accordion-content">
+            <p class="transition-intro">To help your pet adjust comfortably, introduce our meals gradually over 10 days.</p>
+            
+            <div class="timeline-wrapper">
+              <div class="timeline-line"></div>
+              
+              <div class="timeline-step" data-phase="1">
+                <div class="timeline-marker">
+                  <div class="marker-ring"></div>
+                  <div class="marker-fill" style="height: 25%;"></div>
+                </div>
+                <div class="timeline-card-new">
+                  <div class="timeline-badge">Day 1–3</div>
+                  <div class="timeline-split">
+                    <div class="split-bar">
+                      <div class="split-new" style="width: 25%;">
+                        <span class="split-label">25%</span>
+                      </div>
+                      <div class="split-current" style="width: 75%;">
+                        <span class="split-label">75%</span>
+                      </div>
+                    </div>
+                    <div class="split-legend">
+                      <span class="legend-new">New Food</span>
+                      <span class="legend-current">Current Food</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="timeline-step" data-phase="2">
+                <div class="timeline-marker">
+                  <div class="marker-ring"></div>
+                  <div class="marker-fill" style="height: 50%;"></div>
+                </div>
+                <div class="timeline-card-new">
+                  <div class="timeline-badge">Day 4–6</div>
+                  <div class="timeline-split">
+                    <div class="split-bar">
+                      <div class="split-new" style="width: 50%;">
+                        <span class="split-label">50%</span>
+                      </div>
+                      <div class="split-current" style="width: 50%;">
+                        <span class="split-label">50%</span>
+                      </div>
+                    </div>
+                    <div class="split-legend">
+                      <span class="legend-new">New Food</span>
+                      <span class="legend-current">Current Food</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="timeline-step" data-phase="3">
+                <div class="timeline-marker">
+                  <div class="marker-ring"></div>
+                  <div class="marker-fill" style="height: 75%;"></div>
+                </div>
+                <div class="timeline-card-new">
+                  <div class="timeline-badge">Day 7–9</div>
+                  <div class="timeline-split">
+                    <div class="split-bar">
+                      <div class="split-new" style="width: 75%;">
+                        <span class="split-label">75%</span>
+                      </div>
+                      <div class="split-current" style="width: 25%;">
+                        <span class="split-label">25%</span>
+                      </div>
+                    </div>
+                    <div class="split-legend">
+                      <span class="legend-new">New Food</span>
+                      <span class="legend-current">Current Food</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="timeline-step" data-phase="4">
+                <div class="timeline-marker complete">
+                  <div class="marker-ring"></div>
+                  <div class="marker-fill" style="height: 100%;"></div>
+                  <svg class="check-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <path d="M5 13l4 4L19 7" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </div>
+                <div class="timeline-card-new complete">
+                  <div class="timeline-badge">Day 10+</div>
+                  <div class="timeline-split">
+                    <div class="split-bar complete">
+                      <div class="split-new" style="width: 100%;">
+                        <span class="split-label">100%</span>
+                      </div>
+                    </div>
+                    <div class="split-legend">
+                      <span class="legend-new">New Food Only</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="transition-note">
+              <svg class="note-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
+                <path d="M12 8V12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                <circle cx="12" cy="16" r="1" fill="currentColor"/>
+              </svg>
+              <p>If your pet has a sensitive stomach, extend each phase by a few extra days before moving forward.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section 3: Feeding Guide -->
+        <div class="accordion-item" data-section="guide">
+          <button class="accordion-trigger" aria-expanded="false">
+            <span class="accordion-title">Feeding Guide</span>
+            <svg class="accordion-arrow" width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <path d="M6 9L12 15L18 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <div class="accordion-content">
+            <!-- Personalized Results (if questionnaire was completed) -->
+            <div id="personalizedGuide" class="personalized-guide" style="display: none;">
+              <div class="guide-header">
+                <h3 class="guide-pet-name"></h3>
+                <p class="guide-meal-rec"></p>
+              </div>
+              <div class="guide-metrics">
+                <div class="guide-metric">
+                  <div class="metric-value" id="guideDailyGrams"></div>
+                  <div class="metric-label">Daily Amount</div>
+                </div>
+                <div class="guide-metric">
+                  <div class="metric-value" id="guidePouches"></div>
+                  <div class="metric-label">Pouches per day</div>
+                </div>
+                <div class="guide-metric">
+                  <div class="metric-value" id="guideMeals"></div>
+                  <div class="metric-label">Meals per day</div>
+                </div>
+                <div class="guide-metric">
+                  <div class="metric-value" id="guidePerMeal"></div>
+                  <div class="metric-label">Per meal</div>
+                </div>
+              </div>
+              <p class="guide-note">Each pouch contains 120 grams. For best results, divide the daily amount evenly across meals.</p>
+            </div>
+
+            <!-- Calculator (if no questionnaire data) -->
+            <div id="feedingCalculator" class="feeding-calculator">
+              <div class="calculator-header">
+                <h3 class="calculator-title">Calculate Your Pet's Daily Feeding Amount</h3>
+                <p class="calculator-subtitle">Answer a few questions to determine the perfect portion size</p>
+              </div>
+              
+              <div class="calculator-form">
+                <!-- Step 1: Pet Type & Age -->
+                <div class="calc-section">
+                  <div class="section-header">
+                    <div class="section-number">1</div>
+                    <h4 class="section-title">Pet Information</h4>
+                  </div>
+                  
+                  <div class="form-grid">
+                    <div class="form-group-calc">
+                      <label class="form-label-calc">Pet Type</label>
+                      <div class="toggle-group">
+                        <button type="button" class="toggle-btn" data-field="petType" data-value="cat">
+                          <svg class="toggle-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <path d="M12 2C10.5 2 9 3 8 4.5L4 3L5 7C3.5 8.5 3 11 3 13C3 17.5 7 21 12 21C17 21 21 17.5 21 13C21 11 20.5 8.5 19 7L20 3L16 4.5C15 3 13.5 2 12 2Z" stroke="currentColor" stroke-width="1.5"/>
+                          </svg>
+                          <span>Cat</span>
+                        </button>
+                        <button type="button" class="toggle-btn" data-field="petType" data-value="dog">
+                          <svg class="toggle-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <path d="M10 3L12 6L14 3L15 7L18 5L16 9C17 10 18 12 18 14C18 17 15 20 12 20C9 20 6 17 6 14C6 12 7 10 8 9L6 5L9 7L10 3Z" stroke="currentColor" stroke-width="1.5"/>
+                          </svg>
+                          <span>Dog</span>
+                        </button>
+                      </div>
+                    </div>
+
+                    <div class="form-group-calc">
+                      <label class="form-label-calc">Age Group</label>
+                      <div class="pill-group">
+                        <button type="button" class="pill-btn" data-field="ageGroup" data-value="puppy_kitten">Puppy/Kitten</button>
+                        <button type="button" class="pill-btn" data-field="ageGroup" data-value="adult">Adult</button>
+                        <button type="button" class="pill-btn" data-field="ageGroup" data-value="senior">Senior</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Step 2: Weight & Activity -->
+                <div class="calc-section">
+                  <div class="section-header">
+                    <div class="section-number">2</div>
+                    <h4 class="section-title">Physical Details</h4>
+                  </div>
+                  
+                  <div class="form-grid">
+                    <div class="form-group-calc">
+                      <label class="form-label-calc" for="calcWeight">Current Weight</label>
+                      <div class="input-group-calc">
+                        <input id="calcWeight" class="input-calc" type="number" step="0.1" min="0.5" max="100" placeholder="4.5" />
+                        <select id="calcWeightUnit" class="unit-select">
+                          <option value="kg">kg</option>
+                          <option value="lb">lb</option>
+                        </select>
+                      </div>
+                    </div>
+
+                    <div class="form-group-calc">
+                      <label class="form-label-calc" for="calcActivity">Activity Level</label>
+                      <div class="select-wrapper">
+                        <select id="calcActivity" class="select-calc">
+                          <option value="">Select activity level</option>
+                          <option value="mellow">Mellow</option>
+                          <option value="active">Active</option>
+                          <option value="very_active">Very Active</option>
+                          <option value="athlete">Athlete</option>
+                        </select>
+                        <svg class="select-arrow" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                          <path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Step 3: Neutered Status -->
+                <div class="calc-section">
+                  <div class="section-header">
+                    <div class="section-number">3</div>
+                    <h4 class="section-title">Additional Information</h4>
+                  </div>
+                  
+                  <div class="form-group-calc">
+                    <label class="form-label-calc">Spayed/Neutered?</label>
+                    <div class="toggle-group">
+                      <button type="button" class="toggle-btn" data-field="neutered" data-value="yes">
+                        <svg class="toggle-icon" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                          <path d="M5 10L8 13L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                        <span>Yes</span>
+                      </button>
+                      <button type="button" class="toggle-btn" data-field="neutered" data-value="no">
+                        <svg class="toggle-icon" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                          <path d="M5 5L15 15M15 5L5 15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                        <span>No</span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="calc-actions">
+                  <button type="button" id="calculateBtn" class="btn-calculate" disabled>
+                    <svg class="btn-icon" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                      <circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="2"/>
+                      <path d="M13 13L17 17" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                    <span>Calculate Feeding Amount</span>
+                  </button>
+                </div>
+              </div>
+
+              <div id="calculatorResults" class="calculator-results" style="display: none;">
+                <div class="results-header">
+                  <svg class="results-icon" width="48" height="48" viewBox="0 0 48 48" fill="none">
+                    <circle cx="24" cy="24" r="22" stroke="currentColor" stroke-width="2"/>
+                    <path d="M15 24L21 30L33 18" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+                  </svg>
+                  <h4 class="results-title">Your Pet's Daily Feeding Amount</h4>
+                </div>
+                
+                <div class="results-grid">
+                  <div class="result-card">
+                    <div class="result-value" id="calcDailyGrams"></div>
+                    <div class="result-label">Daily Amount</div>
+                  </div>
+                  <div class="result-card">
+                    <div class="result-value" id="calcPouches"></div>
+                    <div class="result-label">Pouches per day</div>
+                  </div>
+                  <div class="result-card">
+                    <div class="result-value" id="calcMeals"></div>
+                    <div class="result-label">Meals per day</div>
+                  </div>
+                  <div class="result-card">
+                    <div class="result-value" id="calcPerMeal"></div>
+                    <div class="result-label">Per meal</div>
+                  </div>
+                </div>
+                
+                <div class="results-note">
+                  <svg class="note-icon-small" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <circle cx="10" cy="10" r="8" stroke="currentColor" stroke-width="1.5"/>
+                    <path d="M10 6V10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                    <circle cx="10" cy="13" r="0.75" fill="currentColor"/>
+                  </svg>
+                  <p>Each pouch contains 120 grams. For best results, divide the daily amount evenly across meals.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h4>ABOUT US</h4>
+          <ul>
+            <li><a href="index.html">How it Works</a></li>
+            <li><a href="meal-plans.html">Meal Plans</a></li>
+            <li><a href="instructions.html">Instructions</a></li>
+            <li><a href="subscriptions.html">Subscriptions</a></li>
+            <li><a href="events.html">Events</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>LEGAL</h4>
+          <ul>
+            <li><a href="privacy-policy.html">Privacy Policy</a></li>
+            <li><a href="index.html#claims">Claims</a></li>
+            <li><a href="index.html#reviews">Reviews</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>SOCIALS</h4>
+          <div class="social-links">
+            <a href="https://www.instagram.com/thepetkitchen.kw/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5" stroke="currentColor" stroke-width="2"/>
+                <circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="2"/>
+                <circle cx="18" cy="6" r="1" fill="currentColor"/>
+              </svg>
+            </a>
+          </div>
+          <h4>CONTACT</h4>
+          <address>
+            The heart of Kuwait<br>
+            <a href="mailto:info@thepetkitchen.kw">info@thepetkitchen.kw</a>
+          </address>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2024 The Pet Kitchen. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Questionnaire Modal Placeholder -->
+  <div id="questionnaireModal" class="modal">
+    <div class="modal-content"></div>
+  </div>
+  <div id="navOverlay" class="nav-overlay"></div>
+
+  <!-- Core scripts - load in order -->
+  <script src="js/security.js" defer></script>
+  <script src="js/api.js" defer></script>
+  <script src="js/navigation.js" defer></script>
+  <script src="js/emailjs-config.js" defer></script>
+  <script src="js/questionnaire-wizard.js" defer></script>
+  <script src="js/app.js" defer></script>
+  <script src="js/instructions.js" defer></script>
+</body>
+</html>
+

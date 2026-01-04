@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Explore our premium meal plans for dogs and cats. Fresh, nutritious meals made with real ingredients. Beef, chicken, and fish options available.">
+  <meta name="keywords" content="dog food plans, cat food plans, beef meals, chicken meals, fish meals, pet nutrition">
+  <meta name="theme-color" content="#C6A769">
+  
+  <title>Meal Plans - The Pet Kitchen</title>
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%23ffffff'/><text x='50' y='70' font-size='60' text-anchor='middle'>🐾</text></svg>">
+  <link rel="apple-touch-icon" href="assets/images/hero/dog_hero.png">
+  
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/questionnaire-wizard.css">
+  
+  <!-- EmailJS removed - now using Outlook SMTP via backend API -->
+</head>
+<body>
+  <header class="header">
+    <div class="container">
+      <div class="header-content">
+        <a href="index.html" class="logo">
+          <span>THE PET KITCHEN</span>
+        </a>
+        
+        <nav class="nav desktop-nav" role="navigation">
+          <ul class="nav-list">
+            <li><a href="index.html" class="nav-link">ABOUT US</a></li>
+            <li class="nav-item-dropdown">
+              <button 
+                id="menuMealPlans" 
+                class="nav-link dropdown-trigger" 
+                aria-expanded="false" 
+                aria-controls="submenuMealPlans"
+                data-nav="meal-plans"
+              >
+                MEAL PLANS
+                <svg width="12" height="8" viewBox="0 0 12 8" fill="none">
+                  <path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+              </button>
+              <ul id="submenuMealPlans" class="dropdown-menu" role="menu">
+                <li><a href="meal-plans.html?filter=dogs" class="dropdown-link" role="menuitem">Dogs</a></li>
+                <li><a href="meal-plans.html?filter=cats" class="dropdown-link" role="menuitem">Cats</a></li>
+              </ul>
+            </li>
+            <li><a href="instructions.html" class="nav-link">INSTRUCTIONS</a></li>
+            <li><a href="subscriptions.html" class="nav-link">SUBSCRIPTIONS</a></li>
+            <li><a href="index.html#reviews" class="nav-link">REVIEWS</a></li>
+            <li><a href="events.html" class="nav-link">EVENTS</a></li>
+            <li><a href="account.html" class="nav-link">MY ACCOUNT</a></li>
+            <li><a href="cart.html" class="nav-link">CART</a></li>
+            <li><button id="openQuestionnaire" class="btn btn-primary">START QUESTIONNAIRE</button></li>
+          </ul>
+        </nav>
+
+        <button type="button" id="navToggle" class="nav-toggle" aria-expanded="false" aria-controls="mobileMenu" aria-label="Toggle navigation menu">
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+        </button>
+      </div>
+    </div>
+
+    <div id="mobileMenu" class="mobile-panel" role="dialog">
+      <nav class="mobile-nav" role="navigation">
+        <ul class="mobile-nav-list">
+          <li><a href="index.html" class="mobile-nav-link">About Us</a></li>
+          <li class="mobile-nav-item-dropdown">
+            <button class="mobile-nav-link mobile-dropdown-trigger">
+              Meal Plans
+              <svg width="12" height="8" viewBox="0 0 12 8" fill="none">
+                <path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+            </button>
+            <ul class="mobile-dropdown-menu">
+              <li><a href="meal-plans.html?filter=dogs" class="mobile-nav-link mobile-nav-sublink">Dogs</a></li>
+              <li><a href="meal-plans.html?filter=cats" class="mobile-nav-link mobile-nav-sublink">Cats</a></li>
+            </ul>
+          </li>
+          <li><a href="instructions.html" class="mobile-nav-link">Instructions</a></li>
+          <li><a href="subscriptions.html" class="mobile-nav-link">Subscriptions</a></li>
+          <li><a href="index.html#reviews" class="mobile-nav-link">Reviews</a></li>
+          <li><a href="events.html" class="mobile-nav-link">Events</a></li>
+          <li><a href="account.html" class="mobile-nav-link">My Account</a></li>
+          <li><a href="cart.html" class="mobile-nav-link">Cart</a></li>
+          <li><button id="mobileQuestionnaire" class="btn btn-primary mobile-cta">Start Questionnaire</button></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="meal-plans-hero">
+      <div class="container">
+        <h1 class="page-title">MEAL PLANS</h1>
+        <div class="filter-buttons">
+          <button class="filter-btn active" data-filter="all">All</button>
+          <button class="filter-btn" data-filter="dogs">Dogs</button>
+          <button class="filter-btn" data-filter="cats">Cats</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="meal-plans">
+      <div class="container">
+        <div class="meal-cards" id="mealCardsContainer">
+          <!-- Hardcoded meal plans (will be replaced by dynamic ones if API has data) -->
+          <!-- Chicken & Brown Rice -->
+          <article class="meal-card meal--chicken" data-category="dogs">
+            <div class="meal-image">
+              <img 
+                src="assets/images/meals/Chicken dog.png" 
+                alt="Chicken and Brown Rice meal for dogs"
+                width="400"
+                height="400"
+                loading="lazy"
+              />
+            </div>
+            <div class="meal-content">
+              <header class="meal-header">
+                <h2 class="meal-title">Chicken & Brown Rice</h2>
+                <p class="meal-subtitle">Immunity Boost</p>
+              </header>
+              
+              <div class="meal-details">
+                <div class="meal-section">
+                  <h3>Ingredients</h3>
+                  <p>Chicken meat (breast &amp; thigh), brown rice, chicken liver, pumpkin, carrot, spinach, salmon oil, ground flaxseed, eggshell calcium, kelp powder, vitamin &amp; mineral premix, water added for cooking.</p>
+                </div>
+                
+                <div class="meal-section">
+                  <h3>Guaranteed Analysis</h3>
+                  <ul>
+                    <li>Crude Protein (min): 15.0%</li>
+                    <li>Crude Fat (min): 8.0%</li>
+                    <li>Crude Fiber (max): 1.0%</li>
+                    <li>Moisture (max): 70.0%</li>
+                    <li>Ash (max): 2.5%</li>
+                  </ul>
+                </div>
+                
+                <div class="meal-section">
+                  <h3>Benefits</h3>
+                  <ul>
+                    <li>Supports immune system</li>
+                    <li>High-quality protein for muscle development</li>
+                    <li>Rich in antioxidants</li>
+                    <li>Promotes healthy digestion</li>
+                  </ul>
+                </div>
+              </div>
+              
+              <div class="nutrition">
+                <div class="item"><div class="value">15%</div><div class="label">PROTEIN</div></div>
+                <div class="item"><div class="value">1%</div><div class="label">FIBER</div></div>
+                <div class="item"><div class="value">70%</div><div class="label">MOISTURE</div></div>
+                <div class="item"><div class="value">8%</div><div class="label">FATS</div></div>
+                <div class="item"><div class="value">2.5%</div><div class="label">ASH</div></div>
+              </div>
+              
+              <div class="meal-actions">
+                <button class="btn btn-primary add-to-cart-btn" data-sku="DOG-CHICKEN" data-name="Chicken & Brown Rice (Dog)">
+                  Add to Cart
+                </button>
+              </div>
+            </div>
+          </article>
+
+          <!-- Beef & Sweet Potato -->
+          <article class="meal-card meal--beef" data-category="dogs">
+            <div class="meal-image">
+              <img 
+                src="assets/images/meals/Beef Dog.png" 
+                alt="Beef and Sweet Potato meal for dogs"
+                width="400"
+                height="400"
+                loading="lazy"
+              />
+            </div>
+            <div class="meal-content">
+              <header class="meal-header">
+                <h2 class="meal-title">Beef & Sweet Potato</h2>
+                <p class="meal-subtitle">Vitality & Energy</p>
+              </header>
+              
+              <div class="meal-details">
+                <div class="meal-section">
+                  <h3>Ingredients</h3>
+                  <p>Beef meat, beef liver, beef heart/kidney, sweet potato, carrot, spinach, salmon oil, ground flaxseed, eggshell calcium, kelp powder, vitamin &amp; mineral premix, water added for cooking.</p>
+                </div>
+                
+                <div class="meal-section">
+                  <h3>Guaranteed Analysis</h3>
+                  <ul>
+                    <li>Crude Protein (min): 14.0%</li>
+                    <li>Crude Fat (min): 9.0%</li>
+                    <li>Crude Fiber (max): 1.0%</li>
+                    <li>Moisture (max): 70.0%</li>
+                    <li>Ash (max): 2.5%</li>
+                  </ul>
+                </div>
+                
+                <div class="meal-section">
+                  <h3>Benefits</h3>
+                  <ul>
+                    <li>High energy for active dogs</li>
+                    <li>Premium protein source</li>
+                    <li>Supports muscle maintenance</li>
+                    <li>Rich in vitamins and minerals</li>
+                  </ul>
+                </div>
+              </div>
+              
+              <div class="nutrition">
+                <div class="item"><div class="value">14%</div><div class="label">PROTEIN</div></div>
+                <div class="item"><div class="value">1%</div><div class="label">FIBER</div></div>
+                <div class="item"><div class="value">70%</div><div class="label">MOISTURE</div></div>
+                <div class="item"><div class="value">9%</div><div class="label">FATS</div></div>
+                <div class="item"><div class="value">2.5%</div><div class="label">ASH</div></div>
+              </div>
+              
+              <div class="meal-actions">
+                <button class="btn btn-primary add-to-cart-btn" data-sku="DOG-BEEF" data-name="Beef & Sweet Potato (Dog)">
+                  Add to Cart
+                </button>
+              </div>
+            </div>
+          </article>
+
+          <!-- White Fish & Quinoa -->
+          <article class="meal-card meal--fish" data-category="dogs">
+            <div class="meal-image">
+              <img 
+                src="assets/images/meals/Fish Dog.png" 
+                alt="White Fish and Quinoa meal for dogs"
+                width="400"
+                height="400"
+                loading="lazy"
+              />
+            </div>
+            <div class="meal-content">
+              <header class="meal-header">
+                <h2 class="meal-title">White Fish & Quinoa</h2>
+                <p class="meal-subtitle">Skin & Coat Health</p>
+              </header>
+              
+              <div class="meal-details">
+                <div class="meal-section">
+                  <h3>Ingredients</h3>
+                  <p>White fish, quinoa, pumpkin, carrot, spinach, salmon oil, ground flaxseed, eggshell calcium, kelp powder, vitamin &amp; mineral premix, water added for cooking.</p>
+                </div>
+                
+                <div class="meal-section">
+                  <h3>Guaranteed Analysis</h3>
+                  <ul>
+                    <li>Crude Protein (min): 13.0%</li>
+                    <li>Crude Fat (min): 6.0%</li>
+                    <li>Crude Fiber (max): 1.5%</li>
+                    <li>Moisture (max): 73.0%</li>
+                    <li>Ash (max): 2.5%</li>
+                  </ul>
+                </div>
+                
+                <div class="meal-section">
+                  <h3>Benefits</h3>
+                  <ul>
+                    <li>Promotes healthy skin and coat</li>
+                    <li>Rich in omega-3 fatty acids</li>
+                    <li>Easily digestible protein</li>
+                    <li>Supports joint health</li>
+                  </ul>
+                </div>
+              </div>
+              
+              <div class="nutrition">
+                <div class="item"><div class="value">13%</div><div class="label">PROTEIN</div></div>
+                <div class="item"><div class="value">1.5%</div><div class="label">FIBER</div></div>
+                <div class="item"><div class="value">73%</div><div class="label">MOISTURE</div></div>
+                <div class="item"><div class="value">6%</div><div class="label">FATS</div></div>
+                <div class="item"><div class="value">2.5%</div><div class="label">ASH</div></div>
+              </div>
+              
+              <div class="meal-actions">
+                <button class="btn btn-primary add-to-cart-btn" data-sku="DOG-FISH" data-name="White Fish & Quinoa (Dog)">
+                  Add to Cart
+                </button>
+              </div>
+            </div>
+          </article>
+
+          <!-- White Fish & Sardine -->
+          <article class="meal-card meal--fish" data-category="cats">
+            <div class="meal-image">
+              <img 
+                src="assets/images/meals/Fish Cat.png" 
+                alt="White Fish & Sardine recipe for cats"
+                width="400"
+                height="400"
+                loading="lazy"
+              />
+            </div>
+            <div class="meal-content">
+              <header class="meal-header">
+                <h2 class="meal-title">White Fish & Sardine</h2>
+                <p class="meal-subtitle">Digestive Health</p>
+              </header>
+              
+              <div class="meal-details">
+                <div class="meal-section">
+                  <h3>Ingredients</h3>
+                  <p>White fish, sardine, pumpkin, spinach, salmon oil, ground flaxseed, taurine, eggshell calcium, kelp powder, vitamin &amp; mineral premix, water added for cooking.</p>
+                </div>
+                
+                <div class="meal-section">
+                  <h3>Guaranteed Analysis</h3>
+                  <ul>
+                    <li>Crude Protein (min): 17.0%</li>
+                    <li>Crude Fat (min): 9.0%</li>
+                    <li>Crude Fiber (max): 1.0%</li>
+                    <li>Moisture (max): 74.0%</li>
+                    <li>Ash (max): 2.2%</li>
+                    <li>Taurine (min): 0.12%</li>
+                  </ul>
+                </div>
+                
+                <div class="meal-section">
+                  <h3>Benefits</h3>
+                  <ul>
+                    <li>Gentle on sensitive stomachs</li>
+                    <li>Rich in omega-3 for skin and coat</li>
+                    <li>Easy to digest pumpkin and leafy greens</li>
+                    <li>Supports overall feline health</li>
+                  </ul>
+                </div>
+              </div>
+              
+              <div class="nutrition">
+                <div class="item"><div class="value">17%</div><div class="label">PROTEIN</div></div>
+                <div class="item"><div class="value">1%</div><div class="label">FIBER</div></div>
+                <div class="item"><div class="value">74%</div><div class="label">MOISTURE</div></div>
+                <div class="item"><div class="value">9%</div><div class="label">FATS</div></div>
+                <div class="item"><div class="value">2.2%</div><div class="label">ASH</div></div>
+                <div class="item"><div class="value">0.12%</div><div class="label">TAURINE</div></div>
+              </div>
+              
+              <div class="meal-actions">
+                <button class="btn btn-primary add-to-cart-btn" data-sku="CAT-FISH" data-name="White Fish & Sardine (Cat)">
+                  Add to Cart
+                </button>
+              </div>
+            </div>
+          </article>
+
+          <!-- Chicken Recipe -->
+          <article class="meal-card meal--chicken" data-category="cats">
+            <div class="meal-image">
+              <img 
+                src="assets/images/meals/Chicken Cat.png" 
+                alt="Chicken recipe for cats"
+                width="400"
+                height="400"
+                loading="lazy"
+              />
+            </div>
+            <div class="meal-content">
+              <header class="meal-header">
+                <h2 class="meal-title">Chicken Recipe</h2>
+                <p class="meal-subtitle">Heart & Eye Health</p>
+              </header>
+              
+              <div class="meal-details">
+                <div class="meal-section">
+                  <h3>Ingredients</h3>
+                  <p>Chicken meat (breast &amp; thigh), chicken liver, chicken heart, pumpkin, spinach, salmon oil, ground flaxseed, taurine, eggshell calcium, kelp powder, vitamin &amp; mineral premix, water added for cooking.</p>
+                </div>
+                
+                <div class="meal-section">
+                  <h3>Guaranteed Analysis</h3>
+                  <ul>
+                    <li>Crude Protein (min): 18.0%</li>
+                    <li>Crude Fat (min): 10.0%</li>
+                    <li>Crude Fiber (max): 1.0%</li>
+                    <li>Moisture (max): 72.0%</li>
+                    <li>Ash (max): 2.5%</li>
+                    <li>Taurine (min): 0.12%</li>
+                  </ul>
+                </div>
+                
+                <div class="meal-section">
+                  <h3>Benefits</h3>
+                  <ul>
+                    <li>Rich in taurine and essential amino acids for heart & vision health</li>
+                    <li>Gentle on feline stomachs</li>
+                    <li>Spinach and flaxseed deliver natural antioxidants</li>
+                  </ul>
+                </div>
+              </div>
+              
+              <div class="nutrition">
+                <div class="item"><div class="value">18%</div><div class="label">PROTEIN</div></div>
+                <div class="item"><div class="value">1%</div><div class="label">FIBER</div></div>
+                <div class="item"><div class="value">72%</div><div class="label">MOISTURE</div></div>
+                <div class="item"><div class="value">10%</div><div class="label">FATS</div></div>
+                <div class="item"><div class="value">2.5%</div><div class="label">ASH</div></div>
+                <div class="item"><div class="value">0.12%</div><div class="label">TAURINE</div></div>
+              </div>
+              
+              <div class="meal-actions">
+                <button class="btn btn-primary add-to-cart-btn" data-sku="CAT-CHICKEN" data-name="Chicken Recipe (Cat)">
+                  Add to Cart
+                </button>
+              </div>
+            </div>
+          </article>
+
+          <!-- Beef Recipe -->
+          <article class="meal-card meal--beef" data-category="cats">
+            <div class="meal-image">
+              <img 
+                src="assets/images/meals/Beef Cat.png" 
+                alt="Beef recipe for cats"
+                width="400"
+                height="400"
+                loading="lazy"
+              />
+            </div>
+            <div class="meal-content">
+              <header class="meal-header">
+                <h2 class="meal-title">Beef Recipe</h2>
+                <p class="meal-subtitle">Vitality & Energy</p>
+              </header>
+              
+              <div class="meal-details">
+                <div class="meal-section">
+                  <h3>Ingredients</h3>
+                  <p>Beef meat, beef liver, beef heart, pumpkin, spinach, salmon oil, ground flaxseed, taurine, eggshell calcium, kelp powder, vitamin &amp; mineral premix, water added for cooking.</p>
+                </div>
+                
+                <div class="meal-section">
+                  <h3>Guaranteed Analysis</h3>
+                  <ul>
+                    <li>Crude Protein (min): 17.0%</li>
+                    <li>Crude Fat (min): 11.0%</li>
+                    <li>Crude Fiber (max): 1.0%</li>
+                    <li>Moisture (max): 72.0%</li>
+                    <li>Ash (max): 2.5%</li>
+                    <li>Taurine (min): 0.12%</li>
+                  </ul>
+                </div>
+                
+                <div class="meal-section">
+                  <h3>Benefits</h3>
+                  <ul>
+                    <li>Nutrient-dense organ meats support muscle and immunity</li>
+                    <li>Pumpkin and spinach offer natural antioxidants</li>
+                    <li>Great for cats who prefer hearty meals</li>
+                  </ul>
+                </div>
+              </div>
+              
+              <div class="nutrition">
+                <div class="item"><div class="value">17%</div><div class="label">PROTEIN</div></div>
+                <div class="item"><div class="value">1%</div><div class="label">FIBER</div></div>
+                <div class="item"><div class="value">72%</div><div class="label">MOISTURE</div></div>
+                <div class="item"><div class="value">11%</div><div class="label">FATS</div></div>
+                <div class="item"><div class="value">2.5%</div><div class="label">ASH</div></div>
+                <div class="item"><div class="value">0.12%</div><div class="label">TAURINE</div></div>
+              </div>
+              
+              <div class="meal-actions">
+                <button class="btn btn-primary add-to-cart-btn" data-sku="CAT-BEEF" data-name="Beef Recipe (Cat)">
+                  Add to Cart
+                </button>
+              </div>
+            </div>
+          </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h4>ABOUT US</h4>
+          <ul>
+            <li><a href="index.html">How it Works</a></li>
+            <li><a href="meal-plans.html">Meal Plans</a></li>
+            <li><a href="instructions.html">Instructions</a></li>
+            <li><a href="subscriptions.html">Subscriptions</a></li>
+            <li><a href="events.html">Events</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>LEGAL</h4>
+          <ul>
+            <li><a href="privacy-policy.html">Privacy Policy</a></li>
+            <li><a href="index.html#claims">Claims</a></li>
+            <li><a href="index.html#reviews">Reviews</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>SOCIALS</h4>
+          <div class="social-links">
+            <a href="https://www.instagram.com/thepetkitchen.kw/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5" stroke="currentColor" stroke-width="2"/>
+                <circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="2"/>
+                <circle cx="18" cy="6" r="1" fill="currentColor"/>
+              </svg>
+            </a>
+          </div>
+          <h4>CONTACT</h4>
+          <address>
+            The heart of Kuwait<br>
+            <a href="mailto:info@thepetkitchen.kw">info@thepetkitchen.kw</a>
+          </address>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2024 The Pet Kitchen. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Questionnaire Modal -->
+  <div id="questionnaireModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 id="modalTitle">Pet Questionnaire</h2>
+        <button class="modal-close" aria-label="Close questionnaire">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <line x1="18" y1="6" x2="6" y2="18" stroke="currentColor" stroke-width="2"/>
+            <line x1="6" y1="6" x2="18" y2="18" stroke="currentColor" stroke-width="2"/>
+          </svg>
+        </button>
+      </div>
+      
+      <form id="questionnaireForm" class="questionnaire-form">
+        <div class="form-group">
+          <label for="petType">Pet Type</label>
+          <select id="petType" name="petType" required>
+            <option value="">Select pet type</option>
+            <option value="dog">Dog</option>
+            <option value="cat">Cat</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="breed">Breed or Size</label>
+          <input type="text" id="breed" name="breed" placeholder="e.g., Golden Retriever, Small, Large" required>
+        </div>
+
+        <div class="form-group">
+          <label for="age">Age</label>
+          <select id="age" name="age" required>
+            <option value="">Select age range</option>
+            <option value="puppy">Puppy (0-1 year)</option>
+            <option value="adult">Adult (1-7 years)</option>
+            <option value="senior">Senior (7+ years)</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="activity">Activity Level</label>
+          <select id="activity" name="activity" required>
+            <option value="">Select activity level</option>
+            <option value="low">Low</option>
+            <option value="moderate">Moderate</option>
+            <option value="high">High</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="allergies">Allergies (Optional)</label>
+          <textarea id="allergies" name="allergies" placeholder="List any known allergies or sensitivities"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" required>
+        </div>
+
+        <div class="form-group">
+          <label for="phone">Phone (Optional)</label>
+          <input type="tel" id="phone" name="phone">
+        </div>
+
+        <button type="submit" class="btn btn-primary">Get My Recommendation</button>
+      </form>
+
+      <div id="questionnaireResult" class="questionnaire-result" style="display: none;">
+        <h3>Your Recommendation</h3>
+        <div id="recommendationContent"></div>
+        <button class="btn btn-primary" data-action="navigate" data-params='{"url":"meal-plans.html"}'>View Meal Plans</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="navOverlay" class="nav-overlay"></div>
+  
+  <!-- Core scripts - load in order -->
+  <script src="js/security.js" defer></script>
+  <script src="js/api.js" defer></script>
+  <script src="js/navigation.js" defer></script>
+  <script src="js/questionnaire-wizard.js" defer></script>
+  <script src="js/app.js" defer></script>
+  <script src="js/inline-handlers.js" defer></script>
+  <script src="js/performance.js" defer></script>
+  <script src="js/meal-plans.js" defer></script>
+</body>
+</html>

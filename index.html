@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="The Pet Kitchen - Premium fresh pet food delivery in Kuwait. Made with real ingredients, carefully balanced for optimal pet health. Fresh meals for dogs and cats.">
+  <meta name="keywords" content="pet food, dog food, cat food, fresh pet food, Kuwait, premium pet food, healthy pet meals">
+  <meta name="theme-color" content="#C6A769">
+  
+  <!-- Open Graph / Social Media -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="The Pet Kitchen - Premium Pet Food Delivery">
+  <meta property="og:description" content="Fresh, premium pet food delivered to your door. Real ingredients, real nutrition for your pets.">
+  <meta property="og:image" content="assets/images/hero/dog_hero.png">
+  
+  <title>The Pet Kitchen - Premium Pet Food Delivery</title>
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%23ffffff'/><text x='50' y='70' font-size='60' text-anchor='middle'>🐾</text></svg>">
+  <link rel="apple-touch-icon" href="assets/images/hero/dog_hero.png">
+  
+  <!-- Preconnect to external resources -->
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/questionnaire-wizard.css">
+  
+  <!-- EmailJS removed - now using Outlook SMTP via backend API -->
+</head>
+<body>
+  <header class="header">
+    <div class="container">
+      <div class="header-content">
+        <a href="index.html" class="logo">
+          <span>THE PET KITCHEN</span>
+        </a>
+        
+        <nav class="nav desktop-nav" role="navigation">
+          <ul class="nav-list">
+            <li><a href="index.html" class="nav-link">ABOUT US</a></li>
+            <li class="nav-item-dropdown">
+              <button 
+                id="menuMealPlans" 
+                class="nav-link dropdown-trigger" 
+                aria-expanded="false" 
+                aria-controls="submenuMealPlans"
+                data-nav="meal-plans"
+              >
+                MEAL PLANS
+                <svg width="12" height="8" viewBox="0 0 12 8" fill="none">
+                  <path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+              </button>
+              <ul id="submenuMealPlans" class="dropdown-menu" role="menu">
+                <li><a href="meal-plans.html?filter=dogs" class="dropdown-link" role="menuitem">Dogs</a></li>
+                <li><a href="meal-plans.html?filter=cats" class="dropdown-link" role="menuitem">Cats</a></li>
+              </ul>
+            </li>
+            <li><a href="instructions.html" class="nav-link">INSTRUCTIONS</a></li>
+            <li><a href="subscriptions.html" class="nav-link">SUBSCRIPTIONS</a></li>
+            <li><a href="#reviews" class="nav-link">REVIEWS</a></li>
+            <li><a href="events.html" class="nav-link">EVENTS</a></li>
+            <li><a href="account.html" class="nav-link">MY ACCOUNT</a></li>
+            <li><a href="cart.html" class="nav-link">CART</a></li>
+            <li><button id="openQuestionnaire" class="btn btn-primary">START QUESTIONNAIRE</button></li>
+          </ul>
+        </nav>
+
+        <button type="button" id="navToggle" class="nav-toggle" aria-expanded="false" aria-controls="mobileMenu" aria-label="Toggle navigation menu">
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+        </button>
+      </div>
+    </div>
+
+    <div id="mobileMenu" class="mobile-panel" role="dialog">
+      <nav class="mobile-nav" role="navigation">
+        <ul class="mobile-nav-list">
+          <li><a href="index.html" class="mobile-nav-link">About Us</a></li>
+          <li class="mobile-nav-item-dropdown">
+            <button class="mobile-nav-link mobile-dropdown-trigger">
+              Meal Plans
+              <svg width="12" height="8" viewBox="0 0 12 8" fill="none">
+                <path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+            </button>
+            <ul class="mobile-dropdown-menu">
+              <li><a href="meal-plans.html?filter=dogs" class="mobile-nav-link mobile-nav-sublink">Dogs</a></li>
+              <li><a href="meal-plans.html?filter=cats" class="mobile-nav-link mobile-nav-sublink">Cats</a></li>
+            </ul>
+          </li>
+          <li><a href="instructions.html" class="mobile-nav-link">Instructions</a></li>
+          <li><a href="subscriptions.html" class="mobile-nav-link">Subscriptions</a></li>
+          <li><a href="#reviews" class="mobile-nav-link">Reviews</a></li>
+          <li><a href="events.html" class="mobile-nav-link">Events</a></li>
+          <li><a href="account.html" class="mobile-nav-link">My Account</a></li>
+          <li><a href="cart.html" class="mobile-nav-link">Cart</a></li>
+          <li><button id="mobileQuestionnaire" class="btn btn-primary mobile-cta">Start Questionnaire</button></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero hero--tpk">
+      <div class="hero__inner">
+        <h1 class="hero__title" id="tpkTitle">
+          <span class="hero__title-the">THE </span><span class="hero__title-pet">PET </span><span class="hero__title-kitchen">KITCHEN</span>
+        </h1>
+
+        <p class="hero__lede">
+          At <strong>The Pet Kitchen</strong>, we make real food for real pets. Our meals are crafted
+          in small batches using only the finest ingredients, carefully balanced for optimal pet health.
+        </p>
+        <p class="hero__sublede">
+          We're here to make mealtime healthier, tastier, and simpler, <em>for you and your pets.</em>
+        </p>
+        <p class="hero-slogan"><em>"Nourishing Pets, Nurturing Bonds"</em></p>
+        <div class="hero-cta-group">
+          <button id="startQuestionnaireHero" class="btn btn-primary">START QUESTIONNAIRE</button>
+          <a class="btn btn-outline" href="subscriptions.html">BUILD YOUR PET’S PLAN</a>
+        </div>
+      </div>
+    </section>
+
+    <div class="wave-spacer">
+      <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
+        <path d="M0,50 C200,100 400,20 600,70 C800,100 1000,30 1200,80 L1200,120 L0,120 Z"/>
+      </svg>
+    </div>
+
+    <section class="how-it-works">
+      <div class="container">
+        <h2 class="section-title">HOW IT WORKS?</h2>
+        <div class="steps">
+          <div class="step">
+            <div class="step-number">1</div>
+            <div class="step-content">
+              <h3>Tell us about your Dog / Cat</h3>
+              <p>and we'll calculate their perfect portion</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-number">2</div>
+            <div class="step-content">
+              <h3>Get a custom meal plan</h3>
+              <p>with expert-recommended, fresh recipes</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-number">3</div>
+            <div class="step-content">
+              <h3>Enjoy fresh food delivered</h3>
+              <p>right to your door, on your schedule</p>
+            </div>
+          </div>
+        </div>
+        <div class="cta-button-row">
+          <button id="startQuestionnaireHeroSection" class="btn btn-primary">START QUESTIONNAIRE</button>
+          <a class="btn btn-outline" href="subscriptions.html">BUILD YOUR PET’S PLAN</a>
+        </div>
+      </div>
+    </section>
+
+    <div class="wave-spacer wave-spacer-reverse">
+      <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
+        <path d="M0,50 C200,100 400,20 600,70 C800,100 1000,30 1200,80 L1200,120 L0,120 Z"/>
+      </svg>
+    </div>
+
+    <section class="meal-preview">
+      <div class="container">
+        <h2 class="section-title">DOG FOOD</h2>
+        <div class="meal-cards-preview">
+          <div class="meal-card-preview meal-preview--chicken">
+            <img 
+              src="assets/images/meals/Chicken dog.png" 
+              alt="Chicken and Brown Rice meal for dogs"
+              width="400"
+              height="400"
+              loading="lazy"
+            />
+            <h4>CHICKEN & BROWN RICE</h4>
+          </div>
+          <div class="meal-card-preview meal-preview--beef">
+            <img 
+              src="assets/images/meals/Beef Dog.png" 
+              alt="Beef and Sweet Potato meal for dogs"
+              width="400"
+              height="400"
+              loading="lazy"
+            />
+            <h4>BEEF & SWEET POTATO</h4>
+          </div>
+          <div class="meal-card-preview meal-preview--fish">
+            <img 
+              src="assets/images/meals/Fish Dog.png" 
+              alt="White Fish and Quinoa meal for dogs"
+              width="400"
+              height="400"
+              loading="lazy"
+            />
+            <h4>WHITE FISH & QUINOA</h4>
+          </div>
+        </div>
+
+        <h2 class="section-title">CAT FOOD</h2>
+        <div class="meal-cards-preview">
+          <div class="meal-card-preview meal-preview--fish">
+            <img 
+              src="assets/images/meals/Fish Cat.png" 
+              alt="Fish, Rice and Carrots meal for cats"
+              width="400"
+              height="400"
+              loading="lazy"
+            />
+            <h4>FISH, RICE & CARROTS</h4>
+          </div>
+          <div class="meal-card-preview meal-preview--chicken">
+            <img 
+              src="assets/images/meals/Chicken Cat.png" 
+              alt="Chicken Hearts, Liver and Rice meal for cats"
+              width="400"
+              height="400"
+              loading="lazy"
+            />
+            <h4>CHICKEN HEARTS, LIVER & RICE</h4>
+          </div>
+          <div class="meal-card-preview meal-preview--beef">
+            <img 
+              src="assets/images/meals/Beef Cat.png" 
+              alt="Beef Hearts, Liver and Sweet Potato meal for cats"
+              width="400"
+              height="400"
+              loading="lazy"
+            />
+            <h4>BEEF HEARTS, LIVER & SWEET POTATO</h4>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="wave-spacer">
+      <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
+        <path d="M0,50 C200,100 400,20 600,70 C800,100 1000,30 1200,80 L1200,120 L0,120 Z"/>
+      </svg>
+    </div>
+
+    <section class="claims">
+      <div class="container">
+        <h2 class="section-title">CLAIMS</h2>
+        <div class="claims-grid">
+          <div class="claim">
+            <img src="assets/images/icons/SVG image.svg" alt="Pet Approved" class="claim-icon" width="48" height="48" loading="lazy">
+            <span>Pet Approved</span>
+          </div>
+          <div class="claim">
+            <img src="assets/images/icons/natural.svg" alt="100% Natural" class="claim-icon" width="48" height="48" loading="lazy">
+            <span>100% Natural</span>
+          </div>
+          <div class="claim">
+            <img src="assets/images/icons/Local Business Icon.svg" alt="Local Brand" class="claim-icon" width="48" height="48" loading="lazy">
+            <span>Local Brand</span>
+          </div>
+          <div class="claim">
+            <img src="assets/images/icons/No Waiting Sign.svg" alt="No Artificial Flavors" class="claim-icon" width="48" height="48" loading="lazy">
+            <span>No Artificial Flavors</span>
+          </div>
+          <div class="claim">
+            <img src="assets/images/icons/Herbs for Spa Treatment.svg" alt="High-Quality Ingredients" class="claim-icon" width="48" height="48" loading="lazy">
+            <span>High-Quality Ingredients</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="wave-spacer wave-spacer-reverse">
+      <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
+        <path d="M0,50 C200,100 400,20 600,70 C800,100 1000,30 1200,80 L1200,120 L0,120 Z"/>
+          </svg>
+        </div>
+
+    <section id="reviews" class="reviews-section" aria-labelledby="reviewsTitle">
+      <h2 id="reviewsTitle" class="section-title">REVIEWS</h2>
+
+      <div class="reviews-grid">
+        <!-- Cat Review -->
+        <article class="review-card" aria-label="Testimonial by Luna the Cat">
+          <div class="review-avatar">
+            <img src="assets/images/hero/cat_hero.png" alt="Luna the Cat" width="200" height="200" loading="lazy" />
+            <span class="review-badge">Verified Taster</span>
+          </div>
+
+          <div class="review-bubble">
+            <svg class="quote-mark" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M8 5h4L8 13h4v6H4v-6l4-8zm12 0h-4l-4 8h4v6h8v-6l-4-8z"></path>
+            </svg>
+            <p class="review-text">
+              "I used to knock my old food off the counter out of protest. Now I actually meow at the fridge. They think I'm being affectionate. I'm not. I just want more fish."
+            </p>
+          </div>
+
+          <div class="review-meta">
+            <span class="review-name">Luna</span>
+            <span class="review-role">The Cat</span>
+          </div>
+        </article>
+
+        <!-- Dog Review -->
+        <article class="review-card" aria-label="Testimonial by Max the Dog">
+          <div class="review-avatar">
+            <img src="assets/images/hero/dog_hero.png" alt="Max the Dog" width="200" height="200" loading="lazy" />
+            <span class="review-badge">Verified Taster</span>
+          </div>
+
+          <div class="review-bubble">
+            <svg class="quote-mark" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M8 5h4L8 13h4v6H4v-6l4-8zm12 0h-4l-4 8h4v6h8v-6l-4-8z"></path>
+            </svg>
+            <p class="review-text">
+              "I ate my bowl so fast I forgot to breathe. Then I stole my neighbor's portion. Then I dramatically sighed for thirds. They say I'm 'food motivated.' I say I'm a connoisseur."
+            </p>
+          </div>
+
+          <div class="review-meta">
+            <span class="review-name">Saint</span>
+            <span class="review-role">The Dog</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <div class="wave-spacer">
+      <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
+        <path d="M0,50 C200,100 400,20 600,70 C800,100 1000,30 1200,80 L1200,120 L0,120 Z"/>
+      </svg>
+    </div>
+
+    <section class="cta">
+      <div class="container">
+        <div class="cta-content">
+          <h2>Can't decide what your Pet needs?</h2>
+          <div class="cta-button-row">
+          <button id="ctaQuestionnaire" class="btn btn-primary">START QUESTIONNAIRE</button>
+            <a class="btn btn-outline" href="subscriptions.html">BUILD YOUR PET’S PLAN</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h4>ABOUT US</h4>
+          <ul>
+            <li><a href="index.html">How it Works</a></li>
+            <li><a href="meal-plans.html">Meal Plans</a></li>
+            <li><a href="instructions.html">Instructions</a></li>
+            <li><a href="subscriptions.html">Subscriptions</a></li>
+            <li><a href="events.html">Events</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>LEGAL</h4>
+          <ul>
+            <li><a href="privacy-policy.html">Privacy Policy</a></li>
+            <li><a href="index.html#claims">Claims</a></li>
+            <li><a href="index.html#reviews">Reviews</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>SOCIALS</h4>
+          <div class="social-links">
+            <a href="https://www.instagram.com/thepetkitchen.kw/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5" stroke="currentColor" stroke-width="2"/>
+                <circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="2"/>
+                <circle cx="18" cy="6" r="1" fill="currentColor"/>
+              </svg>
+            </a>
+          </div>
+          <h4>CONTACT</h4>
+          <address>
+            The heart of Kuwait<br>
+            <a href="mailto:info@thepetkitchen.kw">info@thepetkitchen.kw</a>
+          </address>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2024 The Pet Kitchen. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Questionnaire Modal -->
+  <div id="questionnaireModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 id="modalTitle">Pet Questionnaire</h2>
+        <button class="modal-close" aria-label="Close questionnaire">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <line x1="18" y1="6" x2="6" y2="18" stroke="currentColor" stroke-width="2"/>
+            <line x1="6" y1="6" x2="18" y2="18" stroke="currentColor" stroke-width="2"/>
+          </svg>
+        </button>
+      </div>
+      
+      <form id="questionnaireForm" class="questionnaire-form">
+        <div class="form-group">
+          <label for="petType">Pet Type</label>
+          <select id="petType" name="petType" required>
+            <option value="">Select pet type</option>
+            <option value="dog">Dog</option>
+            <option value="cat">Cat</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="breed">Breed or Size</label>
+          <input type="text" id="breed" name="breed" placeholder="e.g., Golden Retriever, Small, Large" required>
+        </div>
+
+        <div class="form-group">
+          <label for="age">Age</label>
+          <select id="age" name="age" required>
+            <option value="">Select age range</option>
+            <option value="puppy">Puppy (0-1 year)</option>
+            <option value="adult">Adult (1-7 years)</option>
+            <option value="senior">Senior (7+ years)</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="activity">Activity Level</label>
+          <select id="activity" name="activity" required>
+            <option value="">Select activity level</option>
+            <option value="low">Low</option>
+            <option value="moderate">Moderate</option>
+            <option value="high">High</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="allergies">Allergies (Optional)</label>
+          <textarea id="allergies" name="allergies" placeholder="List any known allergies or sensitivities"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" required>
+        </div>
+
+        <div class="form-group">
+          <label for="phone">Phone (Optional)</label>
+          <input type="tel" id="phone" name="phone">
+        </div>
+
+        <button type="submit" class="btn btn-primary">Get My Recommendation</button>
+      </form>
+
+      <div id="questionnaireResult" class="questionnaire-result" style="display: none;">
+        <h3>Your Recommendation</h3>
+        <div id="recommendationContent"></div>
+        <button class="btn btn-primary" data-action="navigate" data-params='{"url":"meal-plans.html"}'>View Meal Plans</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="navOverlay" class="nav-overlay"></div>
+  
+  <!-- Core scripts - load in order -->
+  <script src="js/security.js" defer></script>
+  <script src="js/api.js" defer></script>
+  <script src="js/error-handler.js" defer></script>
+  <script src="js/navigation.js" defer></script>
+  <script src="js/email-service.js" defer></script>
+  <script src="js/questionnaire-wizard.js" defer></script>
+  <script src="js/app.js" defer></script>
+  <script src="js/inline-handlers.js" defer></script>
+  <script src="js/performance.js" defer></script>
+
+  <!-- Animations - loaded after main scripts -->
+  <script src="js/animations.js" defer></script>
+</body>
+</html>

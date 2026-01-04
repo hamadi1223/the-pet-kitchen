@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="jest tests" tests="6" failures="4" errors="0" time="33.846">
+  <testsuite name="Email Service" errors="0" failures="4" skipped="0" timestamp="2025-12-30T06:59:51" time="33.819" tests="6">
+    <testcase classname="Email Service Order Confirmation Email sends order confirmation with correct data" name="Email Service Order Confirmation Email sends order confirmation with correct data" time="9.419">
+      <failure>Error: expect(received).toBe(expected) // Object.is equality
+
+Expected: true
+Received: false
+    at Object.toBe (/Users/hamadi/Downloads/The Pet Kitchen Website/backend/tests/unit/email.test.js:40:30)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)</failure>
+    </testcase>
+    <testcase classname="Email Service Order Confirmation Email includes order summary in email" name="Email Service Order Confirmation Email includes order summary in email" time="7.866">
+      <failure>Error: expect(received).toBe(expected) // Object.is equality
+
+Expected: true
+Received: false
+    at Object.toBe (/Users/hamadi/Downloads/The Pet Kitchen Website/backend/tests/unit/email.test.js:58:30)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)</failure>
+    </testcase>
+    <testcase classname="Email Service Payment Received Email sends payment confirmation" name="Email Service Payment Received Email sends payment confirmation" time="7.158">
+      <failure>Error: expect(received).toBe(expected) // Object.is equality
+
+Expected: true
+Received: false
+    at Object.toBe (/Users/hamadi/Downloads/The Pet Kitchen Website/backend/tests/unit/email.test.js:76:30)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)</failure>
+    </testcase>
+    <testcase classname="Email Service Shipping Confirmation Email sends shipping confirmation with tracking" name="Email Service Shipping Confirmation Email sends shipping confirmation with tracking" time="8.865">
+      <failure>Error: expect(received).toBe(expected) // Object.is equality
+
+Expected: true
+Received: false
+    at Object.toBe (/Users/hamadi/Downloads/The Pet Kitchen Website/backend/tests/unit/email.test.js:93:30)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)</failure>
+    </testcase>
+    <testcase classname="Email Service Email Queue queues email on failure" name="Email Service Email Queue queues email on failure" time="0">
+    </testcase>
+    <testcase classname="Email Service Email Queue retries failed emails" name="Email Service Email Queue retries failed emails" time="0">
+    </testcase>
+    <testcase classname=" Test execution failure: could be caused by test hooks like &apos;afterAll&apos;." name=" Test execution failure: could be caused by test hooks like &apos;afterAll&apos;." time="0">
+      <failure>{&quot;message&quot;:&quot;&quot;,&quot;stack&quot;:&quot;Error: Unknown database &apos;petkitchen_test&apos;\n    at PromisePool.end (/Users/hamadi/Downloads/The Pet Kitchen Website/backend/node_modules/mysql2/lib/promise/pool.js:72:22)\n    at Object.end (/Users/hamadi/Downloads/The Pet Kitchen Website/backend/tests/setup.js:31:14)\n    at Promise.then.completed (/Users/hamadi/Downloads/The Pet Kitchen Website/backend/node_modules/jest-circus/build/utils.js:298:28)\n    at new Promise (&lt;anonymous&gt;)\n    at callAsyncCircusFn (/Users/hamadi/Downloads/The Pet Kitchen Website/backend/node_modules/jest-circus/build/utils.js:231:10)\n    at _callCircusHook (/Users/hamadi/Downloads/The Pet Kitchen Website/backend/node_modules/jest-circus/build/run.js:281:40)\n    at processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at _runTestsForDescribeBlock (/Users/hamadi/Downloads/The Pet Kitchen Website/backend/node_modules/jest-circus/build/run.js:154:7)\n    at run (/Users/hamadi/Downloads/The Pet Kitchen Website/backend/node_modules/jest-circus/build/run.js:71:3)\n    at runAndTransformResultsToJestFormat (/Users/hamadi/Downloads/The Pet Kitchen Website/backend/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapterInit.js:122:21)\n    at jestAdapter (/Users/hamadi/Downloads/The Pet Kitchen Website/backend/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapter.js:79:19)\n    at runTestInternal (/Users/hamadi/Downloads/The Pet Kitchen Website/backend/node_modules/jest-runner/build/runTest.js:367:16)\n    at runTest (/Users/hamadi/Downloads/The Pet Kitchen Website/backend/node_modules/jest-runner/build/runTest.js:444:34)&quot;}</failure>
+    </testcase>
+  </testsuite>
+</testsuites>

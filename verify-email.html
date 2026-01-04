@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Verify your email address - The Pet Kitchen">
+  <meta name="theme-color" content="#C6A769">
+  
+  <title>Verify Email - The Pet Kitchen</title>
+  
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%23ffffff'/><text x='50' y='70' font-size='60' text-anchor='middle'>🐾</text></svg>">
+  <link rel="apple-touch-icon" href="assets/images/hero/dog_hero.png">
+  
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/auth.css">
+</head>
+<body>
+  <div class="auth-container">
+    <div class="auth-card">
+      <div class="auth-header">
+        <h1>🐾 The Pet Kitchen</h1>
+        <h2>Verify Your Email</h2>
+      </div>
+
+      <!-- Loading State -->
+      <div id="loadingState" class="auth-message" style="display: none;">
+        <p>Verifying your email address...</p>
+      </div>
+
+      <!-- Success State -->
+      <div id="successState" class="auth-message success" style="display: none;">
+        <div style="font-size: 3rem; margin-bottom: 1rem;">✅</div>
+        <h3>Email Verified Successfully!</h3>
+        <p>Your email address has been verified. You can now access all features of your account.</p>
+        <p style="margin-top: 1rem; color: #666; font-size: 0.9rem;">Redirecting to your account page...</p>
+        <a href="account.html?verified=true" class="btn btn-primary" style="margin-top: 1.5rem;">Go to My Account</a>
+      </div>
+
+      <!-- Error State -->
+      <div id="errorState" class="auth-message error" style="display: none;">
+        <div style="font-size: 3rem; margin-bottom: 1rem;">❌</div>
+        <h3>Verification Failed</h3>
+        <p id="errorMessage"></p>
+        <div style="margin-top: 1.5rem;">
+          <button id="resendBtn" class="btn btn-outline" style="margin-right: 1rem;">Resend Verification Email</button>
+          <a href="login.html" class="btn btn-primary">Go to Login</a>
+        </div>
+      </div>
+
+      <!-- Already Verified State -->
+      <div id="alreadyVerifiedState" class="auth-message success" style="display: none;">
+        <div style="font-size: 3rem; margin-bottom: 1rem;">✅</div>
+        <h3>Already Verified</h3>
+        <p>Your email address is already verified.</p>
+        <a href="account.html?verified=true" class="btn btn-primary" style="margin-top: 1.5rem;">Go to My Account</a>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/security.js" defer></script>
+  <script src="js/api.js"></script>
+  <script>
+    // Verify email on page load
+    document.addEventListener('DOMContentLoaded', async () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      const token = urlParams.get('token');
+
+      const loadingState = document.getElementById('loadingState');
+      const successState = document.getElementById('successState');
+      const errorState = document.getElementById('errorState');
+      const alreadyVerifiedState = document.getElementById('alreadyVerifiedState');
+      const errorMessage = document.getElementById('errorMessage');
+      const resendBtn = document.getElementById('resendBtn');
+
+      if (!token) {
+        errorState.style.display = 'block';
+        errorMessage.textContent = 'No verification token provided. Please check your email for the verification link.';
+        return;
+      }
+
+      // Show loading
+      loadingState.style.display = 'block';
+
+      // Wait for API to be ready
+      let attempts = 0;
+      while (typeof window.authAPI === 'undefined' && attempts < 100) {
+        await new Promise(resolve => setTimeout(resolve, 50));
+        attempts++;
+      }
+
+      if (typeof window.authAPI === 'undefined') {
+        loadingState.style.display = 'none';
+        errorState.style.display = 'block';
+        errorMessage.textContent = 'Failed to initialize. Please refresh the page.';
+        return;
+      }
+
+      try {
+        // Verify email
+        const response = await window.authAPI.verifyEmail(token);
+        
+        loadingState.style.display = 'none';
+        
+        if (response.verified) {
+          if (response.message && response.message.includes('already verified')) {
+            alreadyVerifiedState.style.display = 'block';
+          } else {
+            successState.style.display = 'block';
+          }
+          // Redirect to account page with verification flag to trigger data refresh
+          setTimeout(() => {
+            window.location.href = 'account.html?verified=true';
+          }, 2000);
+        } else {
+          errorState.style.display = 'block';
+          errorMessage.textContent = response.error || 'Verification failed. Please try again.';
+        }
+      } catch (error) {
+        loadingState.style.display = 'none';
+        errorState.style.display = 'block';
+        errorMessage.textContent = error.message || 'An error occurred during verification. Please try again.';
+      }
+
+      // Resend verification email
+      resendBtn?.addEventListener('click', async () => {
+        const email = prompt('Please enter your email address:');
+        if (!email) return;
+
+        try {
+          await window.authAPI.resendVerification(email);
+          alert('If an account with that email exists and is unverified, we\'ve sent a verification email.');
+        } catch (error) {
+          alert('Error: ' + (error.message || 'Failed to resend verification email'));
+        }
+      });
+    });
+  </script>
+</body>
+</html>
+
