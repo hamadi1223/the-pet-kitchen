@@ -4,6 +4,16 @@
 const API_VERSION = 'v1'; // Set to null or '' to use legacy routes
 const API_BASE_URL = (() => {
   const base = (() => {
+    // Check for environment variable first (set by Vercel or build process)
+    if (typeof process !== 'undefined' && process.env && process.env.NEXT_PUBLIC_API_URL) {
+      return process.env.NEXT_PUBLIC_API_URL;
+    }
+    
+    // Check for window-level API URL override (for testing)
+    if (window.BACKEND_API_URL) {
+      return window.BACKEND_API_URL;
+    }
+    
     // If accessing via file:// protocol or localhost (any port or domain), use local API
     if (window.location.protocol === 'file:' || 
         window.location.hostname === 'localhost' || 
@@ -13,6 +23,14 @@ const API_BASE_URL = (() => {
         window.location.hostname.includes('localhost')) {
       return 'http://localhost:8000';
     }
+    
+    // If on Vercel, check for vercel.app domain
+    if (window.location.hostname.includes('vercel.app')) {
+      // Default to localhost for now - UPDATE THIS with your Railway backend URL
+      // You can set this via Vercel environment variable: NEXT_PUBLIC_API_URL
+      return 'http://localhost:8000'; // TODO: Replace with your Railway backend URL
+    }
+    
     // Otherwise use production API
     return 'https://thepetkitchen.net';
   })();

@@ -44,16 +44,30 @@ app.use(cors({
     const allowedOrigins = [
       process.env.FRONTEND_URL,
       'https://thepetkitchen.net',
+      'https://the-pet-kitcheng.vercel.app', // Vercel deployment
+      'https://the-pet-kitchen.vercel.app', // Alternative Vercel domain
+      /^https:\/\/.*\.vercel\.app$/, // All Vercel preview deployments
       'http://localhost:3000',
       'http://localhost:5173', // Vite default
       'http://localhost:8080'  // Common dev port
     ].filter(Boolean);
     
-    if (allowedOrigins.includes(origin)) {
+    // Check if origin matches any allowed origin (including regex patterns)
+    const isAllowed = allowedOrigins.some(allowed => {
+      if (typeof allowed === 'string') {
+        return allowed === origin;
+      } else if (allowed instanceof RegExp) {
+        return allowed.test(origin);
+      }
+      return false;
+    });
+    
+    if (isAllowed) {
       callback(null, true);
     } else {
       // In production, reject unknown origins
       if (process.env.NODE_ENV === 'production') {
+        console.warn('🚫 CORS blocked origin:', origin);
         callback(new Error('Not allowed by CORS'));
       } else {
         // In development, allow all but warn
