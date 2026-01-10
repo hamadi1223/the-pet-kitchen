@@ -1,9 +1,9 @@
-# fly.toml app configuration file generated for the-pet-kitchen on 2026-01-10T20:53:16Z
+# fly.toml app configuration file generated for the-pet-kitchen-lcowoq on 2026-01-10T21:00:14Z
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
 
-app = 'the-pet-kitchen'
+app = 'the-pet-kitchen-lcowoq'
 primary_region = 'cdg'
 
 [build]
