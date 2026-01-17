@@ -1,44 +1,34 @@
 // API Configuration
 // Update this to your backend URL (e.g., 'https://api.thepetkitchen.net' or 'http://localhost:8000')
-// Supports API versioning (defaults to v1, falls back to legacy /api if v1 not available)
-const API_VERSION = 'v1'; // Set to null or '' to use legacy routes
 const API_BASE_URL = (() => {
   const base = (() => {
-    // Check for environment variable first (set by Vercel or build process)
-    if (typeof process !== 'undefined' && process.env && process.env.NEXT_PUBLIC_API_URL) {
-      return process.env.NEXT_PUBLIC_API_URL;
+    // Check for ngrok URL override (for testing)
+    if (window.NGROK_API_URL) {
+      return window.NGROK_API_URL;
     }
     
-    // Check for window-level API URL override (for testing)
-    if (window.BACKEND_API_URL) {
-      return window.BACKEND_API_URL;
+    // If accessing via ngrok domain, use the same ngrok URL for API
+    const hostname = window.location.hostname;
+    if (hostname.includes('ngrok.io') || hostname.includes('ngrok-free.app') || hostname.includes('ngrok-free.dev')) {
+      // Use the same ngrok domain for API
+      return `https://${hostname}`;
     }
     
-    // If accessing via file:// protocol or localhost (any port or domain), use local API
+    // If accessing via file:// protocol or localhost (any port or domain), use ngrok or local API
     if (window.location.protocol === 'file:' || 
-        window.location.hostname === 'localhost' || 
-        window.location.hostname === 'localhost.com' ||
-        window.location.hostname === '127.0.0.1' ||
-        window.location.hostname === '' ||
-        window.location.hostname.includes('localhost')) {
-      return 'http://localhost:8000';
+        hostname === 'localhost' || 
+        hostname === 'localhost.com' ||
+        hostname === '127.0.0.1' ||
+        hostname === '' ||
+        hostname.includes('localhost')) {
+      // Use ngrok URL if available, otherwise fallback to localhost
+      return 'https://monoprotic-lacresha-suavely.ngrok-free.dev';
     }
-    
-    // If on Vercel, check for vercel.app domain
-    if (window.location.hostname.includes('vercel.app')) {
-      // Default to localhost for now - UPDATE THIS with your Railway backend URL
-      // You can set this via Vercel environment variable: NEXT_PUBLIC_API_URL
-      return 'http://localhost:8000'; // TODO: Replace with your Railway backend URL
-    }
-    
     // Otherwise use production API
     return 'https://thepetkitchen.net';
   })();
   
-  // Add version if specified
-  if (API_VERSION) {
-    return `${base}/api/${API_VERSION}`;
-  }
+  // Backend uses /api/ (not /api/v1/)
   return `${base}/api`;
 })();
 
@@ -85,6 +75,11 @@ async function apiRequest(endpoint, options = {}) {
     ...options.headers
   };
 
+  // Add ngrok browser warning skip header if using ngrok
+  if (API_BASE_URL.includes('ngrok')) {
+    headers['ngrok-skip-browser-warning'] = 'true';
+  }
+
   if (token) {
     headers['Authorization'] = `Bearer ${token}`;
   }
@@ -93,10 +88,15 @@ async function apiRequest(endpoint, options = {}) {
   console.log('API Request:', url, options.method || 'GET');
 
   try {
-    const response = await fetch(url, {
+    // Add mode and credentials for CORS
+    const fetchOptions = {
       ...options,
-      headers
-    });
+      headers,
+      mode: 'cors', // Explicitly set CORS mode
+      credentials: 'omit' // Don't send cookies for cross-origin requests
+    };
+    
+    const response = await fetch(url, fetchOptions);
 
     // Handle non-JSON responses
     let data;

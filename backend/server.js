@@ -40,29 +40,26 @@ app.use(cors({
       return callback(null, true);
     }
     
+    // Allow ngrok URLs (for tunneling)
+    if (origin.includes('ngrok.io') || origin.includes('ngrok-free.app') || origin.includes('ngrok-free.dev')) {
+      return callback(null, true);
+    }
+    
+    // Allow file:// protocol (for local HTML files)
+    if (!origin || origin === 'null') {
+      return callback(null, true);
+    }
+    
     // Allow configured frontend URL
     const allowedOrigins = [
       process.env.FRONTEND_URL,
       'https://thepetkitchen.net',
-      'https://the-pet-kitcheng.vercel.app', // Vercel deployment
-      'https://the-pet-kitchen.vercel.app', // Alternative Vercel domain
-      /^https:\/\/.*\.vercel\.app$/, // All Vercel preview deployments
       'http://localhost:3000',
       'http://localhost:5173', // Vite default
       'http://localhost:8080'  // Common dev port
     ].filter(Boolean);
     
-    // Check if origin matches any allowed origin (including regex patterns)
-    const isAllowed = allowedOrigins.some(allowed => {
-      if (typeof allowed === 'string') {
-        return allowed === origin;
-      } else if (allowed instanceof RegExp) {
-        return allowed.test(origin);
-      }
-      return false;
-    });
-    
-    if (isAllowed) {
+    if (allowedOrigins.includes(origin)) {
       callback(null, true);
     } else {
       // In production, reject unknown origins
